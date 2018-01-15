@@ -2,8 +2,8 @@
 
 ## Mục lục
 
-  1. [Giới thiệu](#introduction)
-  2. [Biến](#variables)
+  1. [Giới thiệu](#giới-thiệu)
+  2. [Biến](#biến)
      * [Sử dụng tên biến có ý nghĩa và dễ hiểu](#use-meaningful-and-pronounceable-variable-names)
      * [Sử dụng cùng từ vựng cho cùng một loại biến](#use-the-same-vocabulary-for-the-same-type-of-variable)
      * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#use-searchable-names-part-1)
