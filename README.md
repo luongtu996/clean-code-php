@@ -75,7 +75,7 @@ $ymdstr = $moment->format('y-m-d');
 $currentDate = $moment->format('y-m-d');
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Sử dụng cùng từ vựng cho cùng một loại biến
 
@@ -94,7 +94,7 @@ getUserProfile();
 getUser();
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Đặt tên sao cho dễ tìm kiếm (phần 1)
 
@@ -142,7 +142,7 @@ if ($user->access & User::ACCESS_UPDATE) {
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Sử dụng các biến có tính giải thích
 
@@ -183,7 +183,7 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($matches['city'], $matches['zipCode']);
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh lồng quá nhiều và nên return sớm (phần 1)
 
@@ -232,7 +232,7 @@ function isShopOpen(string $day): bool
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh lồng quá nhiều và nên return sớm (phần 2)
 
@@ -274,7 +274,7 @@ function fibonacci(int $n): int
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh hack não người đọc
 
@@ -312,7 +312,7 @@ foreach ($locations as $location) {
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Đừng thêm những nội dung không cần thiết
 
@@ -344,7 +344,7 @@ class Car
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện
 
@@ -382,11 +382,11 @@ function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ## So sánh
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Sử dụng [identical comparison](http://php.net/manual/en/language.operators.comparison.php)
 
@@ -418,7 +418,7 @@ if( $a !== $b ) {
 ```
 Phép so sánh $a !== $b trả về true.
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 
 ## Hàm
@@ -464,7 +464,7 @@ function createMenu(MenuConfig $config): void
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Hàm chỉ thực hiện một chức năng
 
@@ -508,7 +508,7 @@ function isClientActive(int $client): bool
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tên hàm nên thể hiện chức năng của hàm
 
@@ -548,7 +548,7 @@ $message = new Email(...);
 $message->send();
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Hàm chỉ nên chứa một cấp trừu tượng
 
@@ -685,7 +685,7 @@ class BetterJSAlternative
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Đừng sử dụng cờ như là một đối số của hàm
 
@@ -719,7 +719,7 @@ function createTempFile(string $name): void
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh tác dụng phụ
 
@@ -767,7 +767,7 @@ var_dump($name); // 'Ryan McDermott';
 var_dump($newName); // ['Ryan', 'McDermott'];
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Đừng viết hàm global
 
@@ -818,7 +818,7 @@ $configuration = new Configuration([
 
 Và bây giờ sử dụng instance `Configuration` trong ứng dụng của bạn.
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Đừng sử dụng Singleton pattern
 
@@ -880,7 +880,7 @@ $connection = new DBConnection($dsn);
 
 Và bây giờ sử dụng instance `DBConnection` cho ứng dụng của bạn.
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Đóng gói điều kiện
 
@@ -900,7 +900,7 @@ if ($article->isPublished()) {
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh điều kiện phủ định
 
@@ -931,7 +931,7 @@ if (isDOMNodePresent($node)) {
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh dùng điều kiện
 
@@ -1003,7 +1003,7 @@ class Cessna implements Airplane
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh kiểm tra kiểu dữ liệu (phần 1)
 
@@ -1035,7 +1035,7 @@ function travelToTexas(Traveler $vehicle): void
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh kiểm tra kiểu dữ liệu (phần 2)
 
@@ -1070,7 +1070,7 @@ function combine(int $val1, int $val2): int
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Xóa dead code
 
@@ -1107,7 +1107,7 @@ $request = requestModule($requestUrl);
 inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 
 ## Đối tượng và kiến trúc dữ liệu
@@ -1182,7 +1182,7 @@ $bankAccount->withdraw($shoesPrice);
 $balance = $bankAccount->getBalance();
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tạo đối tượng có chứa thuộc tính hoặc phương thức private/protected
 
@@ -1235,7 +1235,7 @@ $employee = new Employee('John Doe');
 echo 'Employee name: '.$employee->getName(); // Employee name: John Doe
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ## Lớp
 
@@ -1329,7 +1329,7 @@ class Employee
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Tránh viết fluent interfaces
 
@@ -1431,7 +1431,7 @@ $car->setModel('F-150');
 $car->dump();
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ## SOLID
 
@@ -1513,7 +1513,7 @@ class UserSettings
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Nguyên lý Đóng/Mở (OCP)
 
@@ -1626,7 +1626,7 @@ class HttpRequester
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Nguyên lý thay thế Liskov (LSP)
 
@@ -1758,7 +1758,7 @@ $shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeRectangles($shapes);
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Nguyên lý phân tách interface (ISP)
 
@@ -1847,7 +1847,7 @@ class Robot implements Workable
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ### Nguyên lý đảo ngược dependencies (DIP)
 
@@ -1934,7 +1934,7 @@ class Manager
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ## Nguyên lý đừng lặp lại chính mình (DRY)
 
@@ -2027,7 +2027,7 @@ function showList(array $employees): void
 }
 ```
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
 
 ## Các ngôn ngữ khác
 
@@ -2045,4 +2045,4 @@ function showList(array $employees): void
 * :fr: **Pháp:**
    * [errorname/clean-code-php](https://github.com/errorname/clean-code-php)
 
-**[⬆ quay lên đầu](#table-of-contents)**
+**[⬆ quay lên đầu](#mục-lục)**
