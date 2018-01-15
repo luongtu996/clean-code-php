@@ -1,87 +1,85 @@
 # Clean Code PHP
 
-## Table of Contents
+## Mục lục
 
-  1. [Introduction](#introduction)
-  2. [Variables](#variables)
-     * [Use meaningful and pronounceable variable names](#use-meaningful-and-pronounceable-variable-names)
-     * [Use the same vocabulary for the same type of variable](#use-the-same-vocabulary-for-the-same-type-of-variable)
-     * [Use searchable names (part 1)](#use-searchable-names-part-1)
-     * [Use searchable names (part 2)](#use-searchable-names-part-2)
-     * [Use explanatory variables](#use-explanatory-variables)
-     * [Avoid nesting too deeply and return early (part 1)](#avoid-nesting-too-deeply-and-return-early-part-1)
-     * [Avoid nesting too deeply and return early (part 2)](#avoid-nesting-too-deeply-and-return-early-part-2)
-     * [Avoid Mental Mapping](#avoid-mental-mapping)
-     * [Don't add unneeded context](#dont-add-unneeded-context)
-     * [Use default arguments instead of short circuiting or conditionals](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
-  3. [Comparaison](#comparaison)
-     * [Use identical comparison](#identical_comparison)
-  4. [Functions](#functions)
-     * [Function arguments (2 or fewer ideally)](#function-arguments-2-or-fewer-ideally)
-     * [Functions should do one thing](#functions-should-do-one-thing)
-     * [Function names should say what they do](#function-names-should-say-what-they-do)
-     * [Functions should only be one level of abstraction](#functions-should-only-be-one-level-of-abstraction)
-     * [Don't use flags as function parameters](#dont-use-flags-as-function-parameters)
-     * [Avoid Side Effects](#avoid-side-effects)
-     * [Don't write to global functions](#dont-write-to-global-functions)
-     * [Don't use a Singleton pattern](#dont-use-a-singleton-pattern)
-     * [Encapsulate conditionals](#encapsulate-conditionals)
-     * [Avoid negative conditionals](#avoid-negative-conditionals)
-     * [Avoid conditionals](#avoid-conditionals)
-     * [Avoid type-checking (part 1)](#avoid-type-checking-part-1)
-     * [Avoid type-checking (part 2)](#avoid-type-checking-part-2)
-     * [Remove dead code](#remove-dead-code)
-  5. [Objects and Data Structures](#objects-and-data-structures)
-     * [Use object encapsulation](#use-object-encapsulation)
-     * [Make objects have private/protected members](#make-objects-have-privateprotected-members)
-  6. [Classes](#classes)
-     * [Prefer composition over inheritance](#prefer-composition-over-inheritance)
-     * [Avoid fluent interfaces](#avoid-fluent-interfaces)
+  1. [Giới thiệu](#introduction)
+  2. [Biến](#variables)
+     * [Sử dụng tên biến có ý nghĩa và dễ hiểu](#use-meaningful-and-pronounceable-variable-names)
+     * [Sử dụng cùng từ vựng cho cùng một loại biến](#use-the-same-vocabulary-for-the-same-type-of-variable)
+     * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#use-searchable-names-part-1)
+     * [Đặt tên sao cho dễ tìm kiếm (phần 2)](#use-searchable-names-part-2)
+     * [Sử dụng các biến có tính giải thích](#use-explanatory-variables)
+     * [Tránh lồng quá nhiều và nên return sớm (part 1)](#avoid-nesting-too-deeply-and-return-early-part-1)
+     * [Tránh lồng quá nhiều và nên return sớm (part 2)](#avoid-nesting-too-deeply-and-return-early-part-2)
+     * [Tránh hack não người đọc](#avoid-mental-mapping)
+     * [Đừng thêm những nội dung không cần thiết](#dont-add-unneeded-context)
+     * [Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
+  3. [So sánh](#comparaison)
+     * [Sử dụng so sánh hoàn toàn](#identical_comparison)
+  4. [Hàm](#functions)
+     * [Đối số của hàm (ít hơn hoặc bằng 2 là lý tưởng)](#function-arguments-2-or-fewer-ideally)
+     * [Hàm chỉ thực hiện một chức năng](#functions-should-do-one-thing)
+     * [Tên hàm nên thể hiện chức năng của hàm](#function-names-should-say-what-they-do)
+     * [Hàm chỉ nên chứa một cấp trừu tượng](#functions-should-only-be-one-level-of-abstraction)
+     * [Đừng sử dụng cờ như là một đối số của hàm](#dont-use-flags-as-function-parameters)
+     * [Tránh tác dụng phụ](#avoid-side-effects)
+     * [Đừng viết hàm global](#dont-write-to-global-functions)
+     * [Đừng sử dụng Singleton pattern](#dont-use-a-singleton-pattern)
+     * [Đóng gói điều kiện](#encapsulate-conditionals)
+     * [Tránh điều kiện phủ định](#avoid-negative-conditionals)
+     * [Tránh dùng điều kiện](#avoid-conditionals)
+     * [Tránh kiểm tra kiểu dữ liệu (phần 1)](#avoid-type-checking-part-1)
+     * [Tránh kiểm tra kiểu dữ liệu (phần 2)](#avoid-type-checking-part-2)
+     * [Xóa dead code](#remove-dead-code)
+  5. [Đối tượng và kiến trúc data](#objects-and-data-structures)
+     * [Sử dụng đối tượng đóng gói](#use-object-encapsulation)
+     * [Tạo đối tượng có chứa thuộc tính hoặc phương thức private/protected](#make-objects-have-privateprotected-members)
+  6. [Lớp](#classes)
+     * [Ưu tiên thành phần hơn kế thừa](#prefer-composition-over-inheritance)
+     * [Tránh viết fluent interfaces](#avoid-fluent-interfaces)
   7. [SOLID](#solid)
-     * [Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
-     * [Open/Closed Principle (OCP)](#openclosed-principle-ocp)
-     * [Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)
-     * [Interface Segregation Principle (ISP)](#interface-segregation-principle-isp)
-     * [Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
-  8. [Don’t repeat yourself (DRY)](#dont-repeat-yourself-dry)
-  9. [Translations](#translations)
+     * [Nguyên lý trách nhiệm duy nhất (SRP)](#single-responsibility-principle-srp)
+     * [Nguyên lý Đóng/Mở (OCP)](#openclosed-principle-ocp)
+     * [Nguyên lý thay thế Liskov (LSP)](#liskov-substitution-principle-lsp)
+     * [Nguyên lý phân tách interface (ISP)](#interface-segregation-principle-isp)
+     * [Nguyên lý đảo ngược dependencies (DIP)](#dependency-inversion-principle-dip)
+  8. [Nguyên lý đừng lặp lại chính mình (DRY)](#dont-repeat-yourself-dry)
+  9. [Các ngôn ngữ khác](#translations)
 
-## Introduction
+## Giới thiệu
 
-Software engineering principles, from Robert C. Martin's book
-[*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
-adapted for PHP. This is not a style guide. It's a guide to producing
-readable, reusable, and refactorable software in PHP.
+Những nguyên lý kỹ thuật phần mềm, được trích từ cuốn sách [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) của Robert C. Martin,
+thích hợp cho ngôn ngữ PHP. Đây không phải là hướng dẫn về phong cách viết code.
+Mà đây là hướng dẫn cách làm thế nào để viết phần mềm dễ đọc, dễ sử dụng lại, và dễ cải tiến trong PHP.
 
-Not every principle herein has to be strictly followed, and even fewer will be universally 
-agreed upon. These are guidelines and nothing more, but they are ones codified over many 
-years of collective experience by the authors of *Clean Code*.
+Bạn không cần phải tuân theo tất cả các nguyên tắc trong tài liệu này.
+Đây chỉ đơn giản là những hướng dẫn, nhưng dù sao nó cũng là đúc kết từ nhiều năm kinh nghiệm của tác giả cuốn sách *Clean Code*.
 
-Inspired from [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
+Repository này lấy cảm hứng từ [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
 
-Although many developers still use PHP 5, most of the examples in this article only work with PHP 7.1+.
+Lưu ý: Dù nhiều lập trình viên còn sử dụng PHP 5, nhưng nhiều ví dụ trong đây chỉ chạy được trên PHP 7.1+.
 
-## Variables
+## Biến
 
-### Use meaningful and pronounceable variable names
+### Sử dụng tên biến có ý nghĩa và dễ hiểu
 
-**Bad:**
+**Không tốt:**
 
 ```php
 $ymdstr = $moment->format('y-m-d');
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 $currentDate = $moment->format('y-m-d');
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Use the same vocabulary for the same type of variable
+### Sử dụng cùng từ vựng cho cùng một loại biến
 
-**Bad:**
+**Không tốt:**
 
 ```php
 getUserInfo();
@@ -90,46 +88,45 @@ getUserRecord();
 getUserProfile();
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 getUser();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Use searchable names (part 1)
+### Đặt tên sao cho dễ tìm kiếm (part 1)
 
-We will read more code than we will ever write. It's important that the code we do write is 
-readable and searchable. By *not* naming variables that end up being meaningful for 
-understanding our program, we hurt our readers.
-Make your names searchable.
+Chúng ta sẽ đọc nhiều code hơn là viết code. Điều quan trọng là code chúng ta viết ra dễ đọc và dễ tìm kiếm.
+Nếu *không* đặt tên biến có ý nghĩa và làm cho chương trình dễ hiểu, chúng ta sẽ gây khó cho người đọc.
+Do đó hãy đặt tên biến có ý nghĩa.
 
-**Bad:**
+**Không tốt:**
 
 ```php
-// What the heck is 448 for?
+// 448 là cái đéo gì?
 $result = $serializer->serialize($data, 448);
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 ```
 
-### Use searchable names (part 2)
+### Đặt tên sao cho dễ tìm kiếm (part 2)
 
-**Bad:**
+**Không tốt:**
 
 ```php
-// What the heck is 4 for?
+// 4 là cái đéo gì?
 if ($user->access & 4) {
     // ...
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class User
@@ -145,11 +142,13 @@ if ($user->access & User::ACCESS_UPDATE) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Use explanatory variables
+### Sử dụng các biến có tính giải thích
 
-**Bad:**
+Tức là đặt tên biến sao cho đọc vô là hiểu nó là gì và nó dùng để làm gì.
+
+**Không tốt:**
 
 ```php
 $address = 'One Infinite Loop, Cupertino 95014';
@@ -159,9 +158,9 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($matches[1], $matches[2]);
 ```
 
-**Not bad:**
+**Không tệ lắm:**
 
-It's better, but we are still heavily dependent on regex.
+Tốt hơn một chút, nhưng vẫn còn phụ thuộc nhiều vào regex.
 
 ```php
 $address = 'One Infinite Loop, Cupertino 95014';
@@ -172,9 +171,9 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($city, $zipCode);
 ```
 
-**Good:**
+**Tốt:**
 
-Decrease dependence on regex by naming subpatterns.
+Đã giảm phụ thuộc vào regex bằng "naming subpatterns".
 
 ```php
 $address = 'One Infinite Loop, Cupertino 95014';
@@ -184,14 +183,13 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($matches['city'], $matches['zipCode']);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid nesting too deeply and return early (part 1)
+### Tránh lồng quá nhiều và nên return sớm (phần 1)
 
-Too many if else statements can make your code hard to follow. Explicit is better
-than implicit.
+Quá nhiều if else sẽ khiến code khó hiểu. Càng rõ ràng càng tốt.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function isShopOpen($day): bool
@@ -217,7 +215,7 @@ function isShopOpen($day): bool
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function isShopOpen(string $day): bool
@@ -234,11 +232,11 @@ function isShopOpen(string $day): bool
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid nesting too deeply and return early (part 2)
+### Tránh lồng quá nhiều và nên return sớm (phần 2)
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function fibonacci(int $n)
@@ -259,7 +257,7 @@ function fibonacci(int $n)
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function fibonacci(int $n): int
@@ -276,14 +274,13 @@ function fibonacci(int $n): int
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid Mental Mapping
+### Tránh hack não người đọc
 
-Don’t force the reader of your code to translate what the variable means.
-Explicit is better than implicit.
+Đừng khiến người đọc code phải khó khăn để hiểu ý nghĩa của biến. Càng rõ ràng càng tốt.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 $l = ['Austin', 'New York', 'San Francisco'];
@@ -300,7 +297,7 @@ for ($i = 0; $i < count($l); $i++) {
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 $locations = ['Austin', 'New York', 'San Francisco'];
@@ -315,14 +312,13 @@ foreach ($locations as $location) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Don't add unneeded context
+### Đừng thêm những nội dung không cần thiết
 
-If your class/object name tells you something, don't repeat that in your
-variable name.
+Nếu tên của class/object đã rõ ràng, không nên lặp lại chúng trong tên biến.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Car
@@ -335,7 +331,7 @@ class Car
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class Car
@@ -348,13 +344,13 @@ class Car
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Use default arguments instead of short circuiting or conditionals
+### Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện
 
-**Not good:**
+**Chưa tốt:**
 
-This is not good because `$breweryName` can be `NULL`.
+Không tốt vì `$breweryName` có thể bị `NULL`.
 
 ```php
 function createMicrobrewery($breweryName = 'Hipster Brew Co.'): void
@@ -363,9 +359,9 @@ function createMicrobrewery($breweryName = 'Hipster Brew Co.'): void
 }
 ```
 
-**Not bad:**
+**Không tệ lắm:**
 
-This opinion is more understandable than the previous version, but it better controls the value of the variable.
+Cái này tốt hơn cái trước, nhưng nó nên quản lý được giá trị của biến thì tốt hơn.
 
 ```php
 function createMicrobrewery($name = null): void
@@ -375,9 +371,9 @@ function createMicrobrewery($name = null): void
 }
 ```
 
-**Good:**
+**Tốt:**
 
- You can use [type hinting](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) and be sure that the `$breweryName` will not be `NULL`.
+ Bạn có thể sử dụng [type hinting](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration) và chắc chắn `$breweryName` sẽ không bị `NULL`.
 
 ```php
 function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
@@ -386,56 +382,57 @@ function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-## Comparison
+## So sánh
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Use [identical comparison](http://php.net/manual/en/language.operators.comparison.php)
+### Sử dụng [identical comparison](http://php.net/manual/en/language.operators.comparison.php)
 
-**Not good:**
+**Chưa tốt:**
+
+Sử dụng *simple comparison*
 
 ```php
 $a = '42';
 $b = 42;
-Use the simple comparison will convert the string in an int
+Sử dụng simple comparison thì nó sẽ tự chuyển kiểu string qua kiểu int
 
 if( $a != $b ) {
-   //The expression will always passes
+   //Biểu thức này sẽ trả về false
 }
 
 ```
-The comparison $a != $b return false but in fact it's true !
-The string '42' is different than the int 42 
+Phép so sánh $a != $b trả về false nhưng trong thực tế thì nó phải là true!
+**Chuỗi** '42' thì phải khác **số** 42 chứ sao bằng được.
 
-**Good:**
-Use the identical comparison will compare type and value
+**Tốt:**
+
+Sử dụng *identical comparison* sẽ so sánh cả kiểu dữ liệu và giá trị
 ```php
 if( $a !== $b ) {
-    //The expression is verified
+    //Biểu thức này trả về true
 }
 
 ```
-The comparison $a !== $b return true.
+Phép so sánh $a !== $b trả về true.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
 
-## Functions
+## Hàm
 
-### Function arguments (2 or fewer ideally)
+### Đối số của hàm (nhỏ hơn hoặc bằng 2 là tốt nhất)
 
-Limiting the amount of function parameters is incredibly important because it makes 
-testing your function easier. Having more than three leads to a combinatorial explosion 
-where you have to test tons of different cases with each separate argument.
+Giới hạn số lượng đối số của hàm vô cùng quan trọng bởi vì nó giúp dễ test hơn.
+Có nhiều hơn 3 đối số dẫn đến một tổ hợp rất nhiều trường hợp khác nhau cần phải test.
 
-Zero arguments is the ideal case. One or two arguments is ok, and three should be avoided. 
-Anything more than that should be consolidated. Usually, if you have more than two 
-arguments then your function is trying to do too much. In cases where it's not, most 
-of the time a higher-level object will suffice as an argument.
+Lý tưởng nhất là khi hàm không có đối số nào. Một hoặc hai đối số là ok, còn ba thì nên hạn chế.
+Bất cứ khi nào nhiều hơn thì cần phải xem lại.
+Thông thường, nếu bạn có nhiều hơn hai đối số thì hàm đã phải xử lý rất nhiều.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
@@ -444,7 +441,7 @@ function createMenu(string $title, string $body, string $buttonText, bool $cance
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class MenuConfig
@@ -467,17 +464,16 @@ function createMenu(MenuConfig $config): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Functions should do one thing
+### Một hàm nên thực hiện một chức năng
 
-This is by far the most important rule in software engineering. When functions do more 
-than one thing, they are harder to compose, test, and reason about. When you can isolate 
-a function to just one action, they can be refactored easily and your code will read much 
-cleaner. If you take nothing else away from this guide other than this, you'll be ahead 
-of many developers.
+Đây là nguyên tắc quan trọng nhất trong phát triển phần mềm.
+Khi hàm thực hiện nhiều hơn một chức năng, chúng khó biên dịch, kiểm tra và biết được nguyên nhân lỗi.
+Khi bạn cô lập một hàm chỉ với một chức năng, nó dễ dàng refactor hơn và code sẽ dễ đọc hơn.
+Nếu bạn làm điều này thì bạn sẽ tốt hơn nhiều lập trình viên khác.
 
-**Bad:**
+**Không tốt:**
 ```php
 function emailClients(array $clients): void
 {
@@ -490,7 +486,7 @@ function emailClients(array $clients): void
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function emailClients(array $clients): void
@@ -512,11 +508,11 @@ function isClientActive(int $client): bool
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Function names should say what they do
+### Tên hàm nên thể hiện chức năng của hàm
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Email
@@ -530,11 +526,11 @@ class Email
 }
 
 $message = new Email(...);
-// What is this? A handle for the message? Are we writing to a file now?
+// Cái gì đây? Một xử lý tin nhắn ư? Nó có đang ghi gì vào file không?
 $message->handle();
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class Email 
@@ -548,19 +544,18 @@ class Email
 }
 
 $message = new Email(...);
-// Clear and obvious
+// Rõ ràng và minh bạch
 $message->send();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Functions should only be one level of abstraction
+### Hàm chỉ nên chứa một cấp trừu tượng
 
-When you have more than one level of abstraction your function is usually
-doing too much. Splitting up functions leads to reusability and easier
-testing.
+Khi bạn có nhiều hơn một cấp của abstract thì hàm thường phải làm quá nhiều việc.
+Hãy chia tách hàm ra để dễ sử dụng lại và dễ test hơn.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function parseBetterJSAlternative(string $code): void
@@ -588,9 +583,9 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**Bad too:**
+**Cũng không tốt:**
 
-We have carried out some of the functionality, but the `parseBetterJSAlternative()` function is still very complex and not testable.
+Chúng ta đã thực hiện tách ra vài hàm, nhưng hàm `parseBetterJSAlternative()` vẫn còn khá phức tạp và khó test.
 
 ```php
 function tokenize(string $code): array
@@ -630,9 +625,9 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**Good:**
+**Tốt:**
 
-The best solution is move out the dependencies of `parseBetterJSAlternative()` function.
+Giải pháp tốt nhất là di chuyển dependencies của hàm `parseBetterJSAlternative()`
 
 ```php
 class Tokenizer
@@ -690,15 +685,14 @@ class BetterJSAlternative
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Don't use flags as function parameters
+### Đừng sử dụng cờ như là một đối số của hàm
 
-Flags tell your user that this function does more than one thing. Functions should 
-do one thing. Split out your functions if they are following different code paths 
-based on a boolean.
+Cờ dùng để nói rằng hàm này thực hiện nhiều hơn một công việc. Nhưng hàm thì chỉ nên xử lý một việc.
+Hãy chia tách hàm của bạn nếu như chúng có nhiều luồng code khác nhau phân biệt bằng boolean(true/false).
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function createFile(string $name, bool $temp = false): void
@@ -711,7 +705,7 @@ function createFile(string $name, bool $temp = false): void
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function createFile(string $name): void
@@ -725,25 +719,21 @@ function createTempFile(string $name): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid Side Effects
+### Tránh tác dụng phụ
 
-A function produces a side effect if it does anything other than take a value in and 
-return another value or values. A side effect could be writing to a file, modifying 
-some global variable, or accidentally wiring all your money to a stranger.
+Một hàm sinh ra tác dụng phụ nếu nó thực hiện việc khác ngoài lấy giá trị vào và trả về một hoặc nhiều giá trị khác.
+Tác dụng phụ có thể là viết vào một file nào đó, sửa đổi biến global, hoặc vô tình chuyển hết tiền của bạn cho người lạ nào đó.
 
-Now, you do need to have side effects in a program on occasion. Like the previous 
-example, you might need to write to a file. What you want to do is to centralize where 
-you are doing this. Don't have several functions and classes that write to a particular 
-file. Have one service that does it. One and only one.
+Nhưng nếu bây giờ bạn cần hàm thực hiện tác dụng phụ thì sao. Giống như ví dụ trước, bạn cần ghi vào file. Điều bạn cần làm
+là tập trung những việc này lại một chỗ. Đừng viết vài hàm và vài lớp chỉ để ghi vào vài file cụ thể.
+Hãy viết một service để làm điều đó. Một và chỉ một service.
 
-The main point is to avoid common pitfalls like sharing state between objects without
-any structure, using mutable data types that can be written to by anything, and not 
-centralizing where your side effects occur. If you can do this, you will be happier 
-than the vast majority of other programmers.
+Hãy tránh những sai lầm phổ biến như: chia sẻ trạng thái giữa các object mà không tuân theo cấu trúc nào,
+sử dụng kiểu dữ liệu có thể thay đổi/bị thay đổi dễ dàng, không tổng hợp các tác dụng phụ có thể xảy ra khi viết hàm.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 // Global variable referenced by following function.
@@ -762,7 +752,7 @@ splitIntoFirstAndLastName();
 var_dump($name); // ['Ryan', 'McDermott'];
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function splitIntoFirstAndLastName(string $name): array
@@ -777,17 +767,18 @@ var_dump($name); // 'Ryan McDermott';
 var_dump($newName); // ['Ryan', 'McDermott'];
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Don't write to global functions
+### Đừng viết hàm global
 
-Polluting globals is a bad practice in many languages because you could clash with another 
-library and the user of your API would be none-the-wiser until they get an exception in 
-production. Let's think about an example: what if you wanted to have configuration array. 
-You could write global function like `config()`, but it could clash with another library 
-that tried to do the same thing.
+Dùng nhiều hàm global là bad practice với nhiều ngôn ngữ bởi vì có thể gây xung đột với thư viện khác 
+và người sử dụng API của bạn không hề hay biết gì cho đến khi nhận được thông báo lỗi.
 
-**Bad:**
+Hãy xem xét ví dụ sau: bạn sẽ làm gì nếu muốn trả về một mảng.
+
+Bạn có thể viết hàm global như `config()`, nhưng nó có thể xung đột với thư viện khác thực hiện cùng chức năng.
+
+**Không tốt:**
 
 ```php
 function config(): array
@@ -798,7 +789,7 @@ function config(): array
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class Configuration
@@ -817,7 +808,7 @@ class Configuration
 }
 ```
 
-Load configuration and create instance of `Configuration` class 
+Tạo instance của lớp `Configuration` 
 
 ```php
 $configuration = new Configuration([
@@ -825,21 +816,22 @@ $configuration = new Configuration([
 ]);
 ```
 
-And now you must use instance of `Configuration` in your application.
+Và bây giờ sử dụng instance `Configuration` trong ứng dụng của bạn.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Don't use a Singleton pattern
+### Đừng sử dụng Singleton pattern
 
-Singleton is an [anti-pattern](https://en.wikipedia.org/wiki/Singleton_pattern). Paraphrased from Brian Button:
- 1. They are generally used as a **global instance**, why is that so bad? Because **you hide the dependencies** of your application in your code, instead of exposing them through the interfaces. Making something global to avoid passing it around is a [code smell](https://en.wikipedia.org/wiki/Code_smell).
- 2. They violate the [single responsibility principle](#single-responsibility-principle-srp): by virtue of the fact that **they control their own creation and lifecycle**.
- 3. They inherently cause code to be tightly [coupled](https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29). This makes faking them out under **test rather difficult** in many cases.
- 4. They carry state around for the lifetime of the application. Another hit to testing since **you can end up with a situation where tests need to be ordered** which is a big no for unit tests. Why? Because each unit test should be independent from the other.
+Singleton là một [anti-pattern](https://en.wikipedia.org/wiki/Singleton_pattern). Trích đoạn từ Brian Button:
+ 1. Chúng thường được sử dụng như **global instance**, vì sao lại không tốt? Bởi vì **bạn ẩn dependencies** của ứng dụng bên trong code của bạn,
+  thay vì thông qua interfaces
+ 2. Chúng vi phạm [single responsibility principle](#single-responsibility-principle-srp): bởi vì thực tế là **chúng điều khiển những gì chúng tạo ra và vòng đời của nó**
+ 3. Chúng đã tạo ra kiểu code [coupling](https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29). Đây là một sự giả mạo và được giấu bằng cách tạo ra nhiều trường hợp **test khó khăn hơn**.
+ 4. Chúng giữ trạng thái suốt vòng đời của ứng dụng. Bạn nên kết thúc sớm testing khi lỗi. Nhưng Singleton thì lại duy trì trạng thái nên không tốt.
 
-There is also very good thoughts by [Misko Hevery](http://misko.hevery.com/about/) about the [root of problem](http://misko.hevery.com/2008/08/25/root-cause-of-singletons/).
+Đây là một ý kiến khác của [Misko Hevery](http://misko.hevery.com/about/) về [gốc rễ của vấn đề](http://misko.hevery.com/2008/08/25/root-cause-of-singletons/).
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class DBConnection
@@ -866,7 +858,7 @@ class DBConnection
 $singleton = DBConnection::getInstance();
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class DBConnection
@@ -880,19 +872,19 @@ class DBConnection
 }
 ```
 
-Create instance of `DBConnection` class and configure it with [DSN](http://php.net/manual/en/pdo.construct.php#refsect1-pdo.construct-parameters).
+Tạo instance của lớp `DBConnection` và cấu hình chúng với [DSN](http://php.net/manual/en/pdo.construct.php#refsect1-pdo.construct-parameters).
 
 ```php
 $connection = new DBConnection($dsn);
 ```
 
-And now you must use instance of `DBConnection` in your application.
+Và bây giờ sử dụng instance `DBConnection` cho ứng dụng của bạn.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Encapsulate conditionals
+### Đóng gói điều kiện
 
-**Bad:**
+**Không tốt:**
 
 ```php
 if ($article->state === 'published') {
@@ -900,7 +892,7 @@ if ($article->state === 'published') {
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 if ($article->isPublished()) {
@@ -908,11 +900,11 @@ if ($article->isPublished()) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid negative conditionals
+### Tránh điều kiện phủ định
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function isDOMNodeNotPresent(\DOMNode $node): bool
@@ -926,7 +918,7 @@ if (!isDOMNodeNotPresent($node))
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function isDOMNodePresent(\DOMNode $node): bool
@@ -939,20 +931,17 @@ if (isDOMNodePresent($node)) {
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid conditionals
+### Tránh dùng điều kiện
 
-This seems like an impossible task. Upon first hearing this, most people say,
-"how am I supposed to do anything without an `if` statement?" The answer is that
-you can use polymorphism to achieve the same task in many cases. The second
-question is usually, "well that's great but why would I want to do that?" The
-answer is a previous clean code concept we learned: a function should only do
-one thing. When you have classes and functions that have `if` statements, you
-are telling your user that your function does more than one thing. Remember,
-just do one thing.
+Điều này có vẻ không khả quan. Hầu hết mọi người sẽ thắc mắc,
+"làm sao có thể làm gì đó mà không có `if`?" Bạn có thể dùng tính đa hình để hoàn thành việc đó trong khá nhiều trường hợp.
+Câu hỏi thứ hai là, "ồ ngon nhưng tại sao phải làm thế?"
+Bởi vì khái niệm clean code mà ta đã học trước đây: một hàm chỉ nên thực hiện một chức năng.
+Khi bạn có một lớp hoặc hàm chứa `if`, tức là bạn đang muốn nó thực hiện nhiều việc. Luôn nhớ, chỉ một mà thôi.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Airplane
@@ -973,7 +962,7 @@ class Airplane
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 interface Airplane
@@ -1014,16 +1003,17 @@ class Cessna implements Airplane
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid type-checking (part 1)
+### Tránh kiểm tra kiểu dữ liệu (phần 1)
 
-PHP is untyped, which means your functions can take any type of argument.
-Sometimes you are bitten by this freedom and it becomes tempting to do
-type-checking in your functions. There are many ways to avoid having to do this.
-The first thing to consider is consistent APIs.
+PHP là một ngôn ngữ không ràng buộc kiểu dữ liệu, nghĩa hàm có thể nhận bất kỳ kiểu nào.
+Thỉnh thoảng thì chúng ta bị ảnh hưởng bởi sự tự do này và nó trở thành điều kiện để phải kiểm tra kiểu dữ liệu trong hàm.
+Có nhiều cách để tránh phải làm việc đó.
 
-**Bad:**
+Điều đầu tiên cần làm là tạo ra những API nhất quán.
+
+**Không tốt:**
 
 ```php
 function travelToTexas($vehicle): void
@@ -1036,7 +1026,7 @@ function travelToTexas($vehicle): void
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function travelToTexas(Traveler $vehicle): void
@@ -1045,21 +1035,20 @@ function travelToTexas(Traveler $vehicle): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid type-checking (part 2)
+### Tránh kiểm tra kiểu dữ liệu (phần 2)
 
-If you are working with basic primitive values like strings, integers, and arrays,
-and you use PHP 7+ and you can't use polymorphism but you still feel the need to
-type-check, you should consider
+Nếu bạn đang làm việc với các kiểu dữ liệu nguyên thủy như strings, integers, và arrays,
+và sử dụng PHP 7+ và bạn không thể sử dụng tính đa hình nhưng bạn vẫn cảm thấy cần kiểm tra kiểu dữ liệu, hãy xem
 [type declaration](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
-or strict mode. It provides you with static typing on top of standard PHP syntax.
-The problem with manually type-checking is that doing it will require so much
-extra verbiage that the faux "type-safety" you get doesn't make up for the lost
-readability. Keep your PHP clean, write good tests, and have good code reviews.
-Otherwise, do all of that but with PHP strict type declaration or strict mode.
+hoặc strict mode. Nó cung cấp cho bạn kiểu static trên PHP standard.
+Vấn đề thông thường khi kiểm tra kiểu dữ liệu là sẽ khiến code khó đọc, mất nhiều hơn là được.
 
-**Bad:**
+Hãy giữ PHP nguyên thủy, viết tests cho tốt, và code reviews cẩn thận là được.
+Nếu không thì chỉ còn cách định nghĩa theo kiểu nghiêm ngặt(strict type declaration) hoặc dùng strict mode.
+
+**Không tốt:**
 
 ```php
 function combine($val1, $val2): int
@@ -1072,7 +1061,7 @@ function combine($val1, $val2): int
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function combine(int $val1, int $val2): int
@@ -1081,15 +1070,15 @@ function combine(int $val1, int $val2): int
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Remove dead code
+### Xóa dead code
 
-Dead code is just as bad as duplicate code. There's no reason to keep it in
-your codebase. If it's not being called, get rid of it! It will still be safe
-in your version history if you still need it.
+Dead code thì cũng củ chuối giống như duplicate code. Không có lý do gì để giữ chúng.
+Nếu đoạn code nào đó không được gọi, hãy xóa đi!
+Sau này cần thì chỉ cần tìm lại phiên bản trước bằng git là được.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function oldRequestModule(string $url): void
@@ -1106,7 +1095,7 @@ $request = newRequestModule($requestUrl);
 inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function requestModule(string $url): void
@@ -1118,28 +1107,27 @@ $request = requestModule($requestUrl);
 inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
 
-## Objects and Data Structures
+## Đối tượng và kiến trúc dữ liệu
 
-### Use object encapsulation
+### Sử dụng đối tượng đóng gói
 
-In PHP you can set `public`, `protected` and `private` keywords for methods. 
-Using it, you can control properties modification on an object. 
+Trong PHP bạn có thể khai `public`, `protected` và `private` cho phương thức và thuộc tính.
+Hãy sử dụng chúng để kiểm soát được sự thay đổi thuộc tính trong object.
 
-* When you want to do more beyond getting an object property, you don't have
-to look up and change every accessor in your codebase.
-* Makes adding validation simple when doing a `set`.
-* Encapsulates the internal representation.
-* Easy to add logging and error handling when getting and setting.
-* Inheriting this class, you can override default functionality.
-* You can lazy load your object's properties, let's say getting it from a
-server.
+* Khi bạn muốn nhiều hơn là chỉ nhận được thuộc tính của object,
+thì ưu điểm là ta không cần phải tìm kiếm và thay đổi quyền mỗi khi truy cập vào object.
+* Giúp tạo validation đơn giản mỗi khi thực hiện `set`.
+* Đóng gói các thành phần bên trong.
+* Dễ dàng ghi log và xử lý lỗi khi get và set.
+* Kế thừa lớp, bạn có thể ghi đè những phương thức mặc định.
+* Bạn có thể lazy load các thuộc tính của object, giả sử nó được lấy từ máy chủ chẳng hạn.
 
-Additionally, this is part of [Open/Closed](#openclosed-principle-ocp) principle.
+Thêm vào đó, đây là một phần của nguyên tắc [Open/Closed](#openclosed-principle-ocp).
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class BankAccount
@@ -1153,7 +1141,7 @@ $bankAccount = new BankAccount();
 $bankAccount->balance -= 100;
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class BankAccount
@@ -1194,19 +1182,21 @@ $bankAccount->withdraw($shoesPrice);
 $balance = $bankAccount->getBalance();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Make objects have private/protected members
+### Tạo đối tượng có chứa thuộc tính hoặc phương thức private/protected
 
-* `public` methods and properties are most dangerous for changes, because some outside code may easily rely on them and you can't control what code relies on them. **Modifications in class are dangerous for all users of class.**
-* `protected` modifier are as dangerous as public, because they are available in scope of any child class. This effectively means that difference between public and protected is only in access mechanism, but encapsulation guarantee remains the same. **Modifications in class are dangerous for all descendant classes.**
-* `private` modifier guarantees that code is **dangerous to modify only in boundaries of single class** (you are safe for modifications and you won't have [Jenga effect](http://www.urbandictionary.com/define.php?term=Jengaphobia&defid=2494196)).
+* Phương thức và thuộc tính `public` rất nguy hiểm, bởi vì vài dòng code phía 
+bên ngoài có thể dễ dàng thay đổi chúng và bạn không thể kiểm soát được nó bị
+thay đổi những gì. **Thay đổi trong lớp rất nguy hiểm cho tất cả các người dùng của lớp đó.**
+* `protected` cũng nguy hiểm không kém, bởi vì chúng được cấp quyền ở tất cả các lớp con. Điều này có nghĩa là sự khác nhau giữa public và protected chỉ là cơ chế truy cập, nhưng tính đóng gói đảm bảo vẫn giữ nguyên. **Sửa đổi trong lớp thì rất nguy hiểm cho các lớp con.**
+* `private` sửa đổi đảm bảo rằng code **sửa đổi chỉ nguy hiểm trong lớp đó** (bạn sẽ được an toàn khi sửa và không có hiệu ứng [Jenga](http://www.urbandictionary.com/define.php?term=Jengaphobia&defid=2494196)).
 
-Therefore, use `private` by default and `public/protected` when you need to provide access for external classes.
+Do đó, hãy mặc định sử dụng `private` và `public/protected` khi bạn cần cung cấp sự truy cập cho các class bên ngoài.
 
-For more informations you can read the [blog post](http://fabien.potencier.org/pragmatism-over-theory-protected-vs-private.html) on this topic written by [Fabien Potencier](https://github.com/fabpot).
+Đọc thêm tại [blog post](http://fabien.potencier.org/pragmatism-over-theory-protected-vs-private.html) được viết bởi [Fabien Potencier](https://github.com/fabpot).
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Employee
@@ -1223,7 +1213,7 @@ $employee = new Employee('John Doe');
 echo 'Employee name: '.$employee->name; // Employee name: John Doe
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class Employee
@@ -1245,30 +1235,26 @@ $employee = new Employee('John Doe');
 echo 'Employee name: '.$employee->getName(); // Employee name: John Doe
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-## Classes
+## Lớp
 
-### Prefer composition over inheritance
+### Ưu tiên thành phần hơn kế thừa
 
-As stated famously in [*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns) by the Gang of Four,
-you should prefer composition over inheritance where you can. There are lots of
-good reasons to use inheritance and lots of good reasons to use composition.
-The main point for this maxim is that if your mind instinctively goes for
-inheritance, try to think if composition could model your problem better. In some
-cases it can.
+Như đã nói trong [*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns) nổi tiếng của Gang of Four,
+bạn nên ưu tiên sử dụng "kiểu thành phần" hơn là "kiểu kế thừa". Có nhiều lý để sử dụng kiểu kế thừa và cũng nhiều nguyên nhân để sử dụng kiểu thành phần.
+Điểm chính của sự tối đa hóa này là nếu bản năng của bạn thích theo kiểu kế thừa,
+hãy thử suy nghĩ "kiểu thành phần" có thể giúp giải quyết vấn đề tốt hơn không. Vì có một vài trường hợp nó sẽ tốt hơn.
 
-You might be wondering then, "when should I use inheritance?" It
-depends on your problem at hand, but this is a decent list of when inheritance
-makes more sense than composition:
+Có thể bạn sẽ tự hỏi, "khi nào thì nên dùng kế thừa?" Nó tùy thuộc vào từng vấn đề, khi nào thì
+kiểu kế thừa tốt hơn kiểu thành phần:
 
-1. Your inheritance represents an "is-a" relationship and not a "has-a"
-relationship (Human->Animal vs. User->UserDetails).
-2. You can reuse code from the base classes (Humans can move like all animals).
-3. You want to make global changes to derived classes by changing a base class.
-(Change the caloric expenditure of all animals when they move).
+1. Kiểu kế thừa đó đại diện cho một mối quan hệ "is-a" chứ không phải mối quan hệ "has-a" (Người->Động vật với Người dùng->Thông tin người dùng).
+2. Bạn cần sử dụng lại code từ lớp cha (Người có thể di chuyển như động vật).
+3. Bạn muốn khi sửa đổi lớp cha thì tất cả lớp có liên quan sẽ thay đổi dễ dàng.
+(Thay đổi lượng calo của tất cả động vật khi chúng di chuyển).
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Employee 
@@ -1305,7 +1291,7 @@ class EmployeeTaxData extends Employee
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class EmployeeTaxData 
@@ -1343,28 +1329,26 @@ class Employee
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Avoid fluent interfaces
+### Tránh viết fluent interfaces
 
-A [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) is an object
-oriented API that aims to improve the readability of the source code by using
-[Method chaining](https://en.wikipedia.org/wiki/Method_chaining).
+[Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) là một API hướng đối tượng có mục đích cải thiện tính dễ đọc của source code bằng cách
+sử dụng [Method chaining](https://en.wikipedia.org/wiki/Method_chaining).
 
-While there can be some contexts, frequently builder objects, where this
-pattern reduces the verbosity of the code (for example the [PHPUnit Mock Builder](https://phpunit.de/manual/current/en/test-doubles.html)
-or the [Doctrine Query Builder](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html)),
-more often it comes at some costs:
+Trong một số ngữ cảnh, thường là khi xây dựng object mà pattern này giảm tính rườm rà của code (ví dụ [PHPUnit Mock Builder](https://phpunit.de/manual/current/en/test-doubles.html)
+hoặc [Doctrine Query Builder](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html)),
+sẽ gây ra một số thiệt hại như sau:
 
-1. Breaks [Encapsulation](https://en.wikipedia.org/wiki/Encapsulation_%28object-oriented_programming%29)
-2. Breaks [Decorators](https://en.wikipedia.org/wiki/Decorator_pattern)
-3. Is harder to [mock](https://en.wikipedia.org/wiki/Mock_object) in a test suite
-4. Makes diffs of commits harder to read
+1. Phá vỡ [Encapsulation](https://en.wikipedia.org/wiki/Encapsulation_%28object-oriented_programming%29)
+2. Phá vỡ [Decorators](https://en.wikipedia.org/wiki/Decorator_pattern)
+3. Khó tạo [mock](https://en.wikipedia.org/wiki/Mock_object) hơn trong test suite
+4. Khiến cho khó đọc "sự khác nhau giữa các file" hơn khi commit code
 
-For more informations you can read the full [blog post](https://ocramius.github.io/blog/fluent-interfaces-are-evil/)
-on this topic written by [Marco Pivetta](https://github.com/Ocramius).
+Để biết thêm thông tin chi tiết, vui lòng đọc bài [blog post](https://ocramius.github.io/blog/fluent-interfaces-are-evil/)
+được viết bởi [Marco Pivetta](https://github.com/Ocramius).
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Car
@@ -1410,7 +1394,7 @@ $car = (new Car())
   ->dump();
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class Car
@@ -1447,30 +1431,25 @@ $car->setModel('F-150');
 $car->dump();
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
 ## SOLID
 
-**SOLID** is the mnemonic acronym introduced by Michael Feathers for the first five principles named by Robert Martin, which meant five basic principles of object-oriented programming and design.
+**SOLID** là từ viết tắt được đưa ra bởi Michael Feathers cho 5 nguyên lý đầu tiên của Robert Martin, 5 nguyên tắc cơ bản của lập trình hướng đối tượng.
 
- * [S: Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
- * [O: Open/Closed Principle (OCP)](#openclosed-principle-ocp)
- * [L: Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)
- * [I: Interface Segregation Principle (ISP)](#interface-segregation-principle-isp)
- * [D: Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
+ * [S: Nguyên lý trách nhiệm duy nhất (SRP)](#single-responsibility-principle-srp)
+ * [O: Nguyên lý Đóng/Mở (OCP)](#openclosed-principle-ocp)
+ * [L: Nguyên lý thay thế Liskov (LSP)](#liskov-substitution-principle-lsp)
+ * [I: Nguyên lý phân tách interface (ISP)](#interface-segregation-principle-isp)
+ * [D: Nguyên lý đảo ngược dependencies (DIP)](#dependency-inversion-principle-dip)
 
-### Single Responsibility Principle (SRP)
+### Nguyên lý trách nhiệm duy nhất (SRP)
 
-As stated in Clean Code, "There should never be more than one reason for a class
-to change". It's tempting to jam-pack a class with a lot of functionality, like
-when you can only take one suitcase on your flight. The issue with this is
-that your class won't be conceptually cohesive and it will give it many reasons
-to change. Minimizing the amount of times you need to change a class is important.
-It's important because if too much functionality is in one class and you modify a piece of it,
-it can be difficult to understand how that will affect other dependent modules in
-your codebase.
+Như đã đề cập trong cuốn Clean Code, "Không nên có nhiều hơn một lý do để thay đổi class".
+Viết một class với thật nhiều chức năng thì quá sướng. Vấn đề là class không có khái niệm liên kết và nó có khá nhiều lý do để thay đổi.
+Nếu quá nhiều chức năng trong một class thì khi thay đổi gì đó mình không biết được hết những ảnh hưởng của nó đến các chức năng khác trong các module liên quan.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class UserSettings
@@ -1496,7 +1475,7 @@ class UserSettings
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 class UserAuth 
@@ -1534,16 +1513,15 @@ class UserSettings
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Open/Closed Principle (OCP)
+### Nguyên lý Đóng/Mở (OCP)
 
-As stated by Bertrand Meyer, "software entities (classes, modules, functions,
-etc.) should be open for extension, but closed for modification." What does that
-mean though? This principle basically states that you should allow users to
-add new functionalities without changing existing code.
+Như đã đề cập bởi Bertrand Meyer, "thực thể phần mềm (lớp, modules, hàm,
+etc.) nên cho phép mở rộng, nhưng không cho phép sửa đổi." Điều đó có nghĩa là gì? Nguyên lý này đơn giản là nên cho phép người dùng
+thêm mới mà không được thay đổi code hiện tại.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 abstract class Adapter
@@ -1608,7 +1586,7 @@ class HttpRequester
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 interface Adapter
@@ -1648,24 +1626,20 @@ class HttpRequester
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Liskov Substitution Principle (LSP)
+### Nguyên lý thay thế Liskov (LSP)
 
-This is a scary term for a very simple concept. It's formally defined as "If S
-is a subtype of T, then objects of type T may be replaced with objects of type S
-(i.e., objects of type S may substitute objects of type T) without altering any
-of the desirable properties of that program (correctness, task performed,
-etc.)." That's an even scarier definition.
+Nó được định nghĩa như sau "Nếu S là phụ thuộc của T, thì object của T có thể được thay thế bởi object của S
+(nghĩa là object của S có thể thay thế object của T) mà không làm thay đổi các thuộc tính của chương trình(tính đúng đắn, công việc thực hiện, ...)"
 
-The best explanation for this is if you have a parent class and a child class,
-then the base class and child class can be used interchangeably without getting
-incorrect results. This might still be confusing, so let's take a look at the
-classic Square-Rectangle example. Mathematically, a square is a rectangle, but
-if you model it using the "is-a" relationship via inheritance, you quickly
-get into trouble.
+Để dễ hiểu hơn, nếu bạn có một class cha và một class con,
+sau đó class cha và class con có thể được sử dụng hoán đổi cho nhau mà không sai kết quả trả về.
+Có thể vẫn còn khó hiểu, hãy xem ví dụ cơ bản Square-Rectangle.
 
-**Bad:**
+Trong toán học, hình vuông là hình chữ nhật, nhưng nếu bạn sử dụng quan hệ "is-a" qua kế thừa, bạn sẽ gặp rắc rối.
+
+**Không tốt:**
 
 ```php
 class Rectangle
@@ -1724,7 +1698,7 @@ $rectangles = [new Rectangle(), new Rectangle(), new Square()];
 renderLargeRectangles($rectangles);
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 abstract class Shape
@@ -1784,19 +1758,17 @@ $shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeRectangles($shapes);
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Interface Segregation Principle (ISP)
+### Nguyên lý phân tách interface (ISP)
 
-ISP states that "Clients should not be forced to depend upon interfaces that
-they do not use." 
+ISP đề cập rằng "Không nên ép người dùng phải phụ thuộc vào interface mà họ không sử dụng." 
 
-A good example to look at that demonstrates this principle is for
-classes that require large settings objects. Not requiring clients to setup
-huge amounts of options is beneficial, because most of the time they won't need
-all of the settings. Making them optional helps prevent having a "fat interface".
+Để hiểu ý nghĩa của nguyên tắc này, đầu tiên hãy nhìn vào những class mà yêu cầu một số lượng lớn các object cần phải cài đặt để sử dụng.
+Không yêu cầu người dùng phải cài đặt số lượng lớn các tùy chọn là một lợi thế, bởi vì hầu hết chúng không cần thiết.
+Hãy coi chúng là tùy chọn(có thể không dùng) để giúp cho interface bớt phình to.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 interface Employee
@@ -1833,9 +1805,9 @@ class Robot implements Employee
 }
 ```
 
-**Good:**
+**Tốt:**
 
-Not every worker is an employee, but every employee is a worker.
+Không phải tất cả worker đều là employee, nhưng employee là một worker.
 
 ```php
 interface Workable
@@ -1875,24 +1847,19 @@ class Robot implements Workable
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-### Dependency Inversion Principle (DIP)
+### Nguyên lý đảo ngược dependencies (DIP)
 
-This principle states two essential things:
-1. High-level modules should not depend on low-level modules. Both should
-depend on abstractions.
-2. Abstractions should not depend upon details. Details should depend on
-abstractions.
+Nguyên lý này đề cập 2 vấn đề cơ bản:
+1. Module cấp cao không nên phụ thuộc vào module cấp thấp. Cả hai nên phụ thuộc vào abstract.
+2. Abstract không nên phụ thuộc vào chi tiết, mà phải ngược lại.
 
-This can be hard to understand at first, but if you've worked with PHP frameworks (like Symfony), you've seen an implementation of this principle in the form of Dependency
-Injection (DI). While they are not identical concepts, DIP keeps high-level
-modules from knowing the details of its low-level modules and setting them up.
-It can accomplish this through DI. A huge benefit of this is that it reduces
-the coupling between modules. Coupling is a very bad development pattern because
-it makes your code hard to refactor.
+Hơi khó hiểu một chút, nhưng nếu làm việc với PHP frameworks (ví dụ Symfony), bạn sẽ thấy nguyên tắc này được áp dụng trên Dependency
+Injection (DI). Một lợi ích lớn của việc này là chúng giảm sự trùng lặp giữa các modules. Trùng lặp thì tất nhiên không tốt vì
+chúng khiến code khó refactor.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 class Employee
@@ -1927,7 +1894,7 @@ class Manager
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 interface Employee
@@ -1967,34 +1934,27 @@ class Manager
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-## Don’t repeat yourself (DRY)
+## Nguyên lý đừng lặp lại chính mình (DRY)
 
-Try to observe the [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) principle.
+Đọc hiểu về nguyên lý [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 
-Do your absolute best to avoid duplicate code. Duplicate code is bad because 
-it means that there's more than one place to alter something if you need to 
-change some logic.
+Tốt nhất nên chống duplicate khi có thể. Vì duplicate code không tốt tí nào, vì khi bạn muốn thay đổi logic bạn cần phải sửa nhiều chỗ.
 
-Imagine if you run a restaurant and you keep track of your inventory: all your 
-tomatoes, onions, garlic, spices, etc. If you have multiple lists that
-you keep this on, then all have to be updated when you serve a dish with
-tomatoes in them. If you only have one list, there's only one place to update!
+Hãy tưởng tượng bạn đang vận hành một nhà hàng và bạn theo dõi lượng hàng tồn kho của bạn: cà chua, hành, tỏi, gia vị,...
+Nếu bạn có nhiều danh sách để quản lý chúng, bạn cần cập nhật tất cả các danh sách đó mỗi khi bạn bán một đĩa thức ăn.
+Nhưng nếu như bạn chỉ có 1 danh sách, thì chỉ cần cập nhật ở một nơi!
 
-Oftentimes you have duplicate code because you have two or more slightly
-different things, that share a lot in common, but their differences force you
-to have two or more separate functions that do much of the same things. Removing 
-duplicate code means creating an abstraction that can handle this set of different 
-things with just one function/module/class.
+Thỉnh thoảng vẫn có duplicate code bởi vì bạn có hai hoặc nhiều hơn những thứ khác nhau, có nhiều điểm chung, nhưng sự khác nhau 
+giữa chúng buộc bạn phải chia ra 2 hàm làm rất nhiều việc.
+Để xóa bỏ duplicate, cần tạo ra một abstract có thể xử lý sự khác biệt giữa chúng với chỉ 1 hàm/module/lớp.
 
-Getting the abstraction right is critical, that's why you should follow the
-SOLID principles laid out in the [Classes](#classes) section. Bad abstractions can be
-worse than duplicate code, so be careful! Having said this, if you can make
-a good abstraction, do it! Don't repeat yourself, otherwise you'll find yourself 
-updating multiple places anytime you want to change one thing.
+Tạo ra được abstract tốt rất quan trọng, đó là lý do tại sao bạn nên dựa theo các nguyên lý SOLID được đưa ra tại [Classes](#classes).
+Abstract củ chuối có thể sẽ tệ hại hơn là duplicate code, hãy cẩn thận!
+Nếu bạn có thể tạo một abstract tốt, hãy tạo nó! Đừng lặp lại code, bằng không bạn sẽ phải cập nhật nhiều nơi mỗi khi muốn sửa đổi gì đó.
 
-**Bad:**
+**Không tốt:**
 
 ```php
 function showDeveloperList(array $developers): void
@@ -2030,7 +1990,7 @@ function showManagerList(array $managers): void
 }
 ```
 
-**Good:**
+**Tốt:**
 
 ```php
 function showList(array $employees): void
@@ -2050,9 +2010,9 @@ function showList(array $employees): void
 }
 ```
 
-**Very good:**
+**Rất tốt:**
 
-It is better to use a compact version of the code.
+Sử dụng một phiên bản gọn hơn thì tốt hơn
 
 ```php
 function showList(array $employees): void
@@ -2067,24 +2027,22 @@ function showList(array $employees): void
 }
 ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
 
-## Translations
+## Các ngôn ngữ khác
 
-This is also available in other languages:
-
-* :cn: **Chinese:**
+* :cn: **Trung Quốc:**
    * [php-cpm/clean-code-php](https://github.com/php-cpm/clean-code-php)
-* :ru: **Russian:**
+* :ru: **Nga:**
    * [peter-gribanov/clean-code-php](https://github.com/peter-gribanov/clean-code-php)
-* :es: **Spanish:**
+* :es: **Tây Ban Nha:**
    * [fikoborquez/clean-code-php](https://github.com/fikoborquez/clean-code-php)
-* :brazil: **Portuguese:**
+* :brazil: **Bồ Đào Nha:**
    * [fabioars/clean-code-php](https://github.com/fabioars/clean-code-php)
    * [jeanjar/clean-code-php](https://github.com/jeanjar/clean-code-php/tree/pt-br)
-* :thailand: **Thai:**
+* :thailand: **Thái Lan:**
    * [panuwizzle/clean-code-php](https://github.com/panuwizzle/clean-code-php)
-* :fr: **French:**
+* :fr: **Pháp:**
    * [errorname/clean-code-php](https://github.com/errorname/clean-code-php)
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ quay lên đầu](#table-of-contents)**
