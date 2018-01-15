@@ -4,47 +4,47 @@
 
   1. [Giới thiệu](#giới-thiệu)
   2. [Biến](#biến)
-     * [Sử dụng tên biến có ý nghĩa và dễ hiểu](#use-meaningful-and-pronounceable-variable-names)
-     * [Sử dụng cùng từ vựng cho cùng một loại biến](#use-the-same-vocabulary-for-the-same-type-of-variable)
-     * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#use-searchable-names-part-1)
-     * [Đặt tên sao cho dễ tìm kiếm (phần 2)](#use-searchable-names-part-2)
-     * [Sử dụng các biến có tính giải thích](#use-explanatory-variables)
-     * [Tránh lồng quá nhiều và nên return sớm (part 1)](#avoid-nesting-too-deeply-and-return-early-part-1)
-     * [Tránh lồng quá nhiều và nên return sớm (part 2)](#avoid-nesting-too-deeply-and-return-early-part-2)
-     * [Tránh hack não người đọc](#avoid-mental-mapping)
-     * [Đừng thêm những nội dung không cần thiết](#dont-add-unneeded-context)
-     * [Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện](#use-default-arguments-instead-of-short-circuiting-or-conditionals)
-  3. [So sánh](#comparaison)
-     * [Sử dụng so sánh hoàn toàn](#identical_comparison)
-  4. [Hàm](#functions)
-     * [Đối số của hàm (ít hơn hoặc bằng 2 là lý tưởng)](#function-arguments-2-or-fewer-ideally)
-     * [Hàm chỉ thực hiện một chức năng](#functions-should-do-one-thing)
-     * [Tên hàm nên thể hiện chức năng của hàm](#function-names-should-say-what-they-do)
-     * [Hàm chỉ nên chứa một cấp trừu tượng](#functions-should-only-be-one-level-of-abstraction)
-     * [Đừng sử dụng cờ như là một đối số của hàm](#dont-use-flags-as-function-parameters)
-     * [Tránh tác dụng phụ](#avoid-side-effects)
-     * [Đừng viết hàm global](#dont-write-to-global-functions)
-     * [Đừng sử dụng Singleton pattern](#dont-use-a-singleton-pattern)
-     * [Đóng gói điều kiện](#encapsulate-conditionals)
-     * [Tránh điều kiện phủ định](#avoid-negative-conditionals)
-     * [Tránh dùng điều kiện](#avoid-conditionals)
-     * [Tránh kiểm tra kiểu dữ liệu (phần 1)](#avoid-type-checking-part-1)
-     * [Tránh kiểm tra kiểu dữ liệu (phần 2)](#avoid-type-checking-part-2)
-     * [Xóa dead code](#remove-dead-code)
-  5. [Đối tượng và kiến trúc data](#objects-and-data-structures)
-     * [Sử dụng đối tượng đóng gói](#use-object-encapsulation)
-     * [Tạo đối tượng có chứa thuộc tính hoặc phương thức private/protected](#make-objects-have-privateprotected-members)
-  6. [Lớp](#classes)
-     * [Ưu tiên thành phần hơn kế thừa](#prefer-composition-over-inheritance)
-     * [Tránh viết fluent interfaces](#avoid-fluent-interfaces)
+     * [Sử dụng tên biến có ý nghĩa và dễ hiểu](#sử-dụng-tên-biến-có-ý-nghĩa-và-dễ-hiểu)
+     * [Sử dụng cùng từ vựng cho cùng một loại biến](#sử-dụng-cùng-từ-vựng-cho-cùng-một-loại-biến)
+     * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#đặt-tên-sao-cho-dễ-tìm-kiếm-phần-1)
+     * [Đặt tên sao cho dễ tìm kiếm (phần 2)](#đặt-tên-sao-cho-dễ-tìm-kiếm-phần-2)
+     * [Sử dụng các biến có tính giải thích](#sử-dụng-các-biến-có-tính-giải-thích)
+     * [Tránh lồng quá nhiều và nên return sớm (phần 1)](#tránh-lồng-quá-nhiều-và-nên-return-sớm-phần-1)
+     * [Tránh lồng quá nhiều và nên return sớm (phần 2)](#tránh-lồng-quá-nhiều-và-nên-return-sớm-phần-2)
+     * [Tránh hack não người đọc](#tránh-hack-não-người-đọc)
+     * [Đừng thêm những nội dung không cần thiết](#đừng-thêm-những-nội-dung-không-cần-thiết)
+     * [Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện](#sử-dụng-đối-số-mặc-định-thay-vì-phải-kiểm-tra-bằng-biểu-thức-điều-kiện)
+  3. [So sánh](#so-sánh)
+     * [Sử dụng identical comparison](#sử-dụng-identical-comparison)
+  4. [Hàm](#hàm)
+     * [Đối số của hàm (ít hơn hoặc bằng 2 là lý tưởng)](#đối-số-của-hàm-ít-hơn-hoặc-bằng-2-là-lý-tưởng)
+     * [Hàm chỉ thực hiện một chức năng](#hàm-chỉ-thực-hiện-một-chức-năng)
+     * [Tên hàm nên thể hiện chức năng của hàm](#tên-hàm-nên-thể-hiện-chức-năng-của-hàm)
+     * [Hàm chỉ nên chứa một cấp trừu tượng](#hàm-chỉ-nên-chứa-một-cấp-trừu-tượng)
+     * [Đừng sử dụng cờ như là một đối số của hàm](#đừng-sử-dụng-cờ-như-là-một-đối-số-của-hàm)
+     * [Tránh tác dụng phụ](#tránh-tác-dụng-phụ)
+     * [Đừng viết hàm global](#đừng-viết-hàm-global)
+     * [Đừng sử dụng Singleton pattern](#đừng-sử-dụng-singleton-pattern)
+     * [Đóng gói điều kiện](#đóng-gói-điều-kiện)
+     * [Tránh điều kiện phủ định](#tránh-điều-kiện-phủ-định)
+     * [Tránh dùng điều kiện](#tránh-dùng-điều-kiện)
+     * [Tránh kiểm tra kiểu dữ liệu (phần 1)](#tránh-kiểm-tra-kiểu-dữ-liệu-phần-1)
+     * [Tránh kiểm tra kiểu dữ liệu (phần 2)](#tránh-kiểm-tra-kiểu-dữ-liệu-phần-2)
+     * [Xóa dead code](#xóa-dead-code)
+  5. [Đối tượng và kiến trúc dữ liệu](#đối-tượng-và-kiến-trúc-dữ-liệu)
+     * [Sử dụng đối tượng đóng gói](#sử-dụng-đối-tượng-đóng-gói)
+     * [Tạo đối tượng có chứa thuộc tính hoặc phương thức private/protected](#tạo-đối-tượng-có-chứa-thuộc-tính-hoặc-phương-thức-private/protected)
+  6. [Lớp](#lớp)
+     * [Ưu tiên thành phần hơn kế thừa](#ưu-tiên-thành-phần-hơn-kế-thừa)
+     * [Tránh viết fluent interfaces](#tránh-viết-fluent-interfaces)
   7. [SOLID](#solid)
-     * [Nguyên lý trách nhiệm duy nhất (SRP)](#single-responsibility-principle-srp)
-     * [Nguyên lý Đóng/Mở (OCP)](#openclosed-principle-ocp)
-     * [Nguyên lý thay thế Liskov (LSP)](#liskov-substitution-principle-lsp)
-     * [Nguyên lý phân tách interface (ISP)](#interface-segregation-principle-isp)
-     * [Nguyên lý đảo ngược dependencies (DIP)](#dependency-inversion-principle-dip)
-  8. [Nguyên lý đừng lặp lại chính mình (DRY)](#dont-repeat-yourself-dry)
-  9. [Các ngôn ngữ khác](#translations)
+     * [Nguyên lý trách nhiệm duy nhất (SRP)](#nguyên-lý-trách-nhiệm-duy-nhất-srp)
+     * [Nguyên lý Đóng/Mở (OCP)](#nguyên-lý-đóng/mở-ocp)
+     * [Nguyên lý thay thế Liskov (LSP)](#nguyên-lý-thay-thế-liskov-lsp)
+     * [Nguyên lý phân tách interface (ISP)](#nguyên-lý-phân-tách-interface-isp)
+     * [Nguyên lý đảo ngược dependencies (DIP)](#nguyên-lý-đảo-ngược-dependencies-dip)
+  8. [Nguyên lý đừng lặp lại chính mình (DRY)](#nguyên-lý-đừng-lặp-lại-chính-mình-dry)
+  9. [Các ngôn ngữ khác](#các-ngôn-ngữ-khác)
 
 ## Giới thiệu
 
@@ -96,7 +96,7 @@ getUser();
 
 **[⬆ quay lên đầu](#table-of-contents)**
 
-### Đặt tên sao cho dễ tìm kiếm (part 1)
+### Đặt tên sao cho dễ tìm kiếm (phần 1)
 
 Chúng ta sẽ đọc nhiều code hơn là viết code. Điều quan trọng là code chúng ta viết ra dễ đọc và dễ tìm kiếm.
 Nếu *không* đặt tên biến có ý nghĩa và làm cho chương trình dễ hiểu, chúng ta sẽ gây khó cho người đọc.
@@ -115,7 +115,7 @@ $result = $serializer->serialize($data, 448);
 $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 ```
 
-### Đặt tên sao cho dễ tìm kiếm (part 2)
+### Đặt tên sao cho dễ tìm kiếm (phần 2)
 
 **Không tốt:**
 
@@ -423,7 +423,7 @@ Phép so sánh $a !== $b trả về true.
 
 ## Hàm
 
-### Đối số của hàm (nhỏ hơn hoặc bằng 2 là tốt nhất)
+### Đối số của hàm (ít hơn hoặc bằng 2 là lý tưởng)
 
 Giới hạn số lượng đối số của hàm vô cùng quan trọng bởi vì nó giúp dễ test hơn.
 Có nhiều hơn 3 đối số dẫn đến một tổ hợp rất nhiều trường hợp khác nhau cần phải test.
@@ -466,7 +466,7 @@ function createMenu(MenuConfig $config): void
 
 **[⬆ quay lên đầu](#table-of-contents)**
 
-### Một hàm nên thực hiện một chức năng
+### Hàm chỉ thực hiện một chức năng
 
 Đây là nguyên tắc quan trọng nhất trong phát triển phần mềm.
 Khi hàm thực hiện nhiều hơn một chức năng, chúng khó biên dịch, kiểm tra và biết được nguyên nhân lỗi.
