@@ -6,7 +6,7 @@
   2. [Biến](#biến)
      * [Sử dụng tên biến có ý nghĩa và dễ hiểu](#sử-dụng-tên-biến-có-ý-nghĩa-và-dễ-hiểu)
      * [Sử dụng cùng từ vựng cho cùng một loại biến](#sử-dụng-cùng-từ-vựng-cho-cùng-một-loại-biến)
-     * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#đặt-tên-sao-cho-dễ-tìm-kiếm-phần-1)
+     * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#đặt-tên-sao-cho-dễ-tìm-kiếm-(phần-1))
      * [Đặt tên sao cho dễ tìm kiếm (phần 2)](#đặt-tên-sao-cho-dễ-tìm-kiếm-phần-2)
      * [Sử dụng các biến có tính giải thích](#sử-dụng-các-biến-có-tính-giải-thích)
      * [Tránh lồng quá nhiều và nên return sớm (phần 1)](#tránh-lồng-quá-nhiều-và-nên-return-sớm-phần-1)
