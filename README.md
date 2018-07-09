@@ -8,9 +8,9 @@
      * [Sử dụng cùng từ vựng cho cùng một loại biến](#sử-dụng-cùng-từ-vựng-cho-cùng-một-loại-biến)
      * [Đặt tên sao cho dễ tìm kiếm (phần 1)](#Đặt-tên-sao-cho-dễ-tìm-kiếm-phần-1)
      * [Đặt tên sao cho dễ tìm kiếm (phần 2)](#Đặt-tên-sao-cho-dễ-tìm-kiếm-phần-2)
-     * [Sử dụng các biến có tính giải thích](#sử-dụng-các-biến-có-tính-giải-thích)
-     * [Tránh lồng quá nhiều và nên return sớm (phần 1)](#tránh-lồng-quá-nhiều-và-nên-return-sớm-phần-1)
-     * [Tránh lồng quá nhiều và nên return sớm (phần 2)](#tránh-lồng-quá-nhiều-và-nên-return-sớm-phần-2)
+     * [Đặt tên biến có dễ hiểu](#đặt-tên-biến-dễ-hiểu)
+     * [Tránh lồng (nesting) quá nhiều và nên return sớm (phần 1)](#tránh-lồng-nesting-quá-nhiều-và-nên-return-sớm-phần-1)
+     * [Tránh lồng (nesting) quá nhiều và nên return sớm (phần 2)](#tránh-lồng-nesting-quá-nhiều-và-nên-return-sớm-phần-2)
      * [Tránh hack não người đọc](#tránh-hack-não-người-đọc)
      * [Đừng thêm những nội dung không cần thiết](#Đừng-thêm-những-nội-dung-không-cần-thiết)
      * [Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện](#sử-dụng-đối-số-mặc-định-thay-vì-phải-kiểm-tra-bằng-biểu-thức-điều-kiện)
@@ -48,12 +48,10 @@
 
 ## Giới thiệu
 
-Những nguyên lý kỹ thuật phần mềm, được trích từ cuốn sách [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) của Robert C. Martin,
-thích hợp cho ngôn ngữ PHP. Đây không phải là hướng dẫn về phong cách viết code.
-Mà đây là hướng dẫn cách làm thế nào để viết phần mềm dễ đọc, dễ sử dụng lại, và dễ cải tiến trong PHP.
+Đây là những nguyên lý kỹ thuật phần mềm, được trích từ cuốn sách [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) của tác giả Robert C. Martin(thường gọi là Uncle Bob) rất thích hợp cho ngôn ngữ PHP. Tài liệu này không phải là sách hướng dẫn về phong cách viết code, mà là hướng dẫn cách làm thế nào để viết phần mềm dễ đọc, dễ sử dụng lại, và dễ cải tiến trong PHP.
 
 Bạn không cần phải tuân theo tất cả các nguyên tắc trong tài liệu này.
-Đây chỉ đơn giản là những hướng dẫn, nhưng dù sao nó cũng là đúc kết từ nhiều năm kinh nghiệm của tác giả cuốn sách *Clean Code*.
+Đây chỉ đơn giản là những hướng dẫn, nhưng dù sao nó cũng là đúc kết từ nhiều năm kinh nghiệm của tác giả.
 
 Repository này lấy cảm hứng từ [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript)
 
@@ -63,7 +61,7 @@ Lưu ý: Dù nhiều lập trình viên còn sử dụng PHP 5, nhưng nhiều v
 
 ### Sử dụng tên biến có ý nghĩa và dễ hiểu
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 $ymdstr = $moment->format('y-m-d');
@@ -75,11 +73,11 @@ $ymdstr = $moment->format('y-m-d');
 $currentDate = $moment->format('y-m-d');
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Sử dụng cùng từ vựng cho cùng một loại biến
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 getUserInfo();
@@ -94,18 +92,17 @@ getUserProfile();
 getUser();
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Đặt tên sao cho dễ tìm kiếm (phần 1)
 
-Chúng ta sẽ đọc nhiều code hơn là viết code. Điều quan trọng là code chúng ta viết ra dễ đọc và dễ tìm kiếm.
-Nếu *không* đặt tên biến có ý nghĩa và làm cho chương trình dễ hiểu, chúng ta sẽ gây khó cho người đọc.
-Do đó hãy đặt tên biến có ý nghĩa.
+Thường thì chúng ta sẽ đọc code nhiều hơn viết code. Nên điều quan trọng là code chúng ta viết ra phải dễ đọc và dễ tìm kiếm.
+Nếu *không* đặt tên biến có ý nghĩa và làm chương trình dễ hiểu, chúng ta sẽ gây khó cho những lập trình viên khác. Do đó mỗi khi đặt tên biến, hàm thì hãy đặt có ý nghĩa.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
-// 448 là cái đéo gì?
+// Oh man, 448 là cái giề vậy?
 $result = $serializer->serialize($data, 448);
 ```
 
@@ -117,10 +114,10 @@ $json = $serializer->serialize($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT
 
 ### Đặt tên sao cho dễ tìm kiếm (phần 2)
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
-// 4 là cái đéo gì?
+// Lại nữa, 4 nghĩa là cái giề đây?
 if ($user->access & 4) {
     // ...
 }
@@ -142,13 +139,13 @@ if ($user->access & User::ACCESS_UPDATE) {
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
-### Sử dụng các biến có tính giải thích
+### Đặt tên biến dễ hiểu
 
-Tức là đặt tên biến sao cho đọc vô là hiểu nó là gì và nó dùng để làm gì.
+Tức là đặt tên biến sao cho đọc vô là hiểu nó là gì và nó dùng để làm gì. Không cần phải suy nghĩ, suy diễn.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 $address = 'One Infinite Loop, Cupertino 95014';
@@ -183,13 +180,13 @@ preg_match($cityZipCodeRegex, $address, $matches);
 saveCityZipCode($matches['city'], $matches['zipCode']);
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
-### Tránh lồng quá nhiều và nên return sớm (phần 1)
+### Tránh lồng (nesting) quá nhiều và nên return sớm (phần 1)
 
-Quá nhiều if else sẽ khiến code khó hiểu. Càng rõ ràng càng tốt.
+Quá nhiều if else lồng nhau sẽ khiến code tăng độ phức tạp, khó debug. Giảm sự phức tạp bằng cách giảm số if else lồng nhau xuống ít nhất có thể. Return sớm chính là một cách giảm số lần lồng nhau.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function isShopOpen($day): bool
@@ -232,11 +229,11 @@ function isShopOpen(string $day): bool
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
-### Tránh lồng quá nhiều và nên return sớm (phần 2)
+### Tránh lồng (nesting) quá nhiều và nên return sớm (phần 2)
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function fibonacci(int $n)
@@ -274,13 +271,13 @@ function fibonacci(int $n): int
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh hack não người đọc
 
-Đừng khiến người đọc code phải khó khăn để hiểu ý nghĩa của biến. Càng rõ ràng càng tốt.
+Đừng khiến người đọc code phải khó khăn để hiểu ý nghĩa của biến. Tên biến càng rõ ràng càng tốt.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 $l = ['Austin', 'New York', 'San Francisco'];
@@ -292,7 +289,7 @@ for ($i = 0; $i < count($l); $i++) {
     // ...
     // ...
     // ...
-    // Wait, what is `$li` for again?
+    // Đợi đã, `$li` là cái gì?
     dispatch($li);
 }
 ```
@@ -312,13 +309,13 @@ foreach ($locations as $location) {
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Đừng thêm những nội dung không cần thiết
 
 Nếu tên của class/object đã rõ ràng, không nên lặp lại chúng trong tên biến.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Car
@@ -344,13 +341,13 @@ class Car
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Sử dụng đối số mặc định thay vì phải kiểm tra bằng biểu thức điều kiện
 
 **Chưa tốt:**
 
-Không tốt vì `$breweryName` có thể bị `NULL`.
+Chưa tốt vì `$breweryName` có thể bị `NULL`.
 
 ```php
 function createMicrobrewery($breweryName = 'Hipster Brew Co.'): void
@@ -382,57 +379,58 @@ function createMicrobrewery(string $breweryName = 'Hipster Brew Co.'): void
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ## So sánh
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Sử dụng [identical comparison](http://php.net/manual/en/language.operators.comparison.php)
 
 **Chưa tốt:**
 
-Sử dụng *simple comparison*
+Sử dụng *simple comparison* (so sánh đơn giản)
 
 ```php
 $a = '42';
 $b = 42;
 Sử dụng simple comparison thì nó sẽ tự chuyển kiểu string qua kiểu int
 
-if( $a != $b ) {
-   //Biểu thức này sẽ trả về false
+if ($a != $b) {
+   //Biểu thức này sẽ trả về `false`
 }
 
 ```
-Phép so sánh $a != $b trả về false nhưng trong thực tế thì nó phải là true!
-**Chuỗi** '42' thì phải khác **số** 42 chứ sao bằng được.
+Phép so sánh $a != $b trả về `false` nhưng trong thực tế thì nó phải là `true`.
+**Chuỗi** '42' thì phải khác **số** 42 chứ đúng không.
 
 **Tốt:**
 
-Sử dụng *identical comparison* sẽ so sánh cả kiểu dữ liệu và giá trị
+Sử dụng *identical comparison* (so sánh giống hệt nhau) để so sánh cả kiểu dữ liệu và giá trị
+
 ```php
-if( $a !== $b ) {
-    //Biểu thức này trả về true
+if ($a !== $b) {
+    //Biểu thức này trả về `true`
 }
 
 ```
-Phép so sánh $a !== $b trả về true.
 
-**[⬆ quay lên đầu](#mục-lục)**
+
+**[⬆ Về mục lục](#mục-lục)**
 
 
 ## Hàm
 
 ### Đối số của hàm (ít hơn hoặc bằng 2 là lý tưởng)
 
-Giới hạn số lượng đối số của hàm vô cùng quan trọng bởi vì nó giúp dễ test hơn.
+Giới hạn số lượng đối số (parameters) của hàm vô cùng quan trọng bởi vì nó giúp dễ test hơn.
 Có nhiều hơn 3 đối số dẫn đến một tổ hợp rất nhiều trường hợp khác nhau cần phải test.
 
 Lý tưởng nhất là khi hàm không có đối số nào. Một hoặc hai đối số là ok, còn ba thì nên hạn chế.
-Bất cứ khi nào nhiều hơn thì cần phải xem lại.
-Thông thường, nếu bạn có nhiều hơn hai đối số thì hàm đã phải xử lý rất nhiều.
+Bất cứ khi nào hàm có nhiều hơn 3 đối số thì cần phải xem xét tìm cách giảm bớt lại.
+Bởi vì nếu hàm có nhiều hơn hai đối số thì nó phải xử lý rất nhiều.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function createMenu(string $title, string $body, string $buttonText, bool $cancellable): void
@@ -464,16 +462,16 @@ function createMenu(MenuConfig $config): void
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Hàm chỉ thực hiện một chức năng
 
 Đây là nguyên tắc quan trọng nhất trong phát triển phần mềm.
 Khi hàm thực hiện nhiều hơn một chức năng, chúng khó biên dịch, kiểm tra và biết được nguyên nhân lỗi.
-Khi bạn cô lập một hàm chỉ với một chức năng, nó dễ dàng refactor hơn và code sẽ dễ đọc hơn.
-Nếu bạn làm điều này thì bạn sẽ tốt hơn nhiều lập trình viên khác.
+Khi bạn tạo hàm chỉ với một chức năng, sẽ dễ dàng refactor hơn và code sẽ dễ đọc hơn.
+Nếu làm được điều này thì bạn sẽ tốt hơn nhiều lập trình viên khác.
 
-**Không tốt:**
+**Chưa tốt:**
 ```php
 function emailClients(array $clients): void
 {
@@ -508,11 +506,11 @@ function isClientActive(int $client): bool
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tên hàm nên thể hiện chức năng của hàm
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Email
@@ -526,7 +524,7 @@ class Email
 }
 
 $message = new Email(...);
-// Cái gì đây? Một xử lý tin nhắn ư? Nó có đang ghi gì vào file không?
+// Hàm này dùng làm gì? Có phải nó xử lý mail? Nó có đang ghi gì vào file không?
 $message->handle();
 ```
 
@@ -544,18 +542,18 @@ class Email
 }
 
 $message = new Email(...);
-// Rõ ràng và minh bạch
+// Rõ ràng và minh bạch, hàm này gửi mail
 $message->send();
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
-### Hàm chỉ nên chứa một cấp trừu tượng
+### Hàm chỉ nên có độ trừu tượng một cấp
 
-Khi bạn có nhiều hơn một cấp của abstract thì hàm thường phải làm quá nhiều việc.
-Hãy chia tách hàm ra để dễ sử dụng lại và dễ test hơn.
+Khi bạn có độ trừu tượng nhiều hơn một cấp thì hàm thường phải làm quá nhiều việc.
+Hãy chia tách hàm ra thành nhiều phần để dễ sử dụng lại và dễ test.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function parseBetterJSAlternative(string $code): void
@@ -583,7 +581,7 @@ function parseBetterJSAlternative(string $code): void
 }
 ```
 
-**Cũng không tốt:**
+**Cũng chưa tốt:**
 
 Chúng ta đã thực hiện tách ra vài hàm, nhưng hàm `parseBetterJSAlternative()` vẫn còn khá phức tạp và khó test.
 
@@ -627,7 +625,7 @@ function parseBetterJSAlternative(string $code): void
 
 **Tốt:**
 
-Giải pháp tốt nhất là di chuyển dependencies của hàm `parseBetterJSAlternative()`
+Giải pháp tốt nhất là chuyển các phần thành các dependencies của hàm `parseBetterJSAlternative()`
 
 ```php
 class Tokenizer
@@ -685,14 +683,14 @@ class BetterJSAlternative
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Đừng sử dụng cờ như là một đối số của hàm
 
-Cờ dùng để nói rằng hàm này thực hiện nhiều hơn một công việc. Nhưng hàm thì chỉ nên xử lý một việc.
-Hãy chia tách hàm của bạn nếu như chúng có nhiều luồng code khác nhau phân biệt bằng boolean(true/false).
+Cờ dùng để nói rằng hàm này thực hiện nhiều hơn một công việc. Nhưng hàm thì chỉ nên xử lý một công việc mà thôi.
+Do đó hãy chia tách hàm của bạn nếu như chúng có nhiều luồng code phân biệt bằng boolean(true/false).
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function createFile(string $name, bool $temp = false): void
@@ -719,25 +717,25 @@ function createTempFile(string $name): void
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh tác dụng phụ
 
-Một hàm sinh ra tác dụng phụ nếu nó thực hiện việc khác ngoài lấy giá trị vào và trả về một hoặc nhiều giá trị khác.
+Một hàm sinh ra tác dụng phụ nếu nó thực hiện thêm việc khác ngoài việc lấy giá trị vào và trả về một hoặc nhiều giá trị khác.
 Tác dụng phụ có thể là viết vào một file nào đó, sửa đổi biến global, hoặc vô tình chuyển hết tiền của bạn cho người lạ nào đó.
 
-Nhưng nếu bây giờ bạn cần hàm thực hiện tác dụng phụ thì sao. Giống như ví dụ trước, bạn cần ghi vào file. Điều bạn cần làm
+Vậy nếu bây giờ bạn cần hàm thực hiện các tác dụng phụ đó thì sao. Giống như ví dụ trước, bạn cần ghi vào file. Điều bạn cần làm
 là tập trung những việc này lại một chỗ. Đừng viết vài hàm và vài lớp chỉ để ghi vào vài file cụ thể.
 Hãy viết một service để làm điều đó. Một và chỉ một service.
 
 Hãy tránh những sai lầm phổ biến như: chia sẻ trạng thái giữa các object mà không tuân theo cấu trúc nào,
 sử dụng kiểu dữ liệu có thể thay đổi/bị thay đổi dễ dàng, không tổng hợp các tác dụng phụ có thể xảy ra khi viết hàm.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
-// Global variable referenced by following function.
-// If we had another function that used this name, now it'd be an array and it could break it.
+// Biến glabal được tham chiếu bởi hàm bên dưới.
+// Nếu ta tạo một function khác sử dụng chính biến name, ví dụ bên dưới cho thấy nó biến thành array và đã bị phá vỡ.
 $name = 'Ryan McDermott';
 
 function splitIntoFirstAndLastName(): void
@@ -767,7 +765,7 @@ var_dump($name); // 'Ryan McDermott';
 var_dump($newName); // ['Ryan', 'McDermott'];
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Đừng viết hàm global
 
@@ -778,7 +776,7 @@ Hãy xem xét ví dụ sau: bạn sẽ làm gì nếu muốn trả về một m�
 
 Bạn có thể viết hàm global như `config()`, nhưng nó có thể xung đột với thư viện khác thực hiện cùng chức năng.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function config(): array
@@ -818,20 +816,20 @@ $configuration = new Configuration([
 
 Và bây giờ sử dụng instance `Configuration` trong ứng dụng của bạn.
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Đừng sử dụng Singleton pattern
 
 Singleton là một [anti-pattern](https://en.wikipedia.org/wiki/Singleton_pattern). Trích đoạn từ Brian Button:
- 1. Chúng thường được sử dụng như **global instance**, vì sao lại không tốt? Bởi vì **bạn ẩn dependencies** của ứng dụng bên trong code của bạn,
+ 1. Chúng thường được sử dụng như **global instance**, vì sao lại Chưa tốt? Bởi vì **bạn ẩn dependencies** của ứng dụng bên trong code của bạn,
   thay vì thông qua interfaces
  2. Chúng vi phạm [single responsibility principle](#single-responsibility-principle-srp): bởi vì thực tế là **chúng điều khiển những gì chúng tạo ra và vòng đời của nó**
  3. Chúng đã tạo ra kiểu code [coupling](https://en.wikipedia.org/wiki/Coupling_%28computer_programming%29). Đây là một sự giả mạo và được giấu bằng cách tạo ra nhiều trường hợp **test khó khăn hơn**.
- 4. Chúng giữ trạng thái suốt vòng đời của ứng dụng. Bạn nên kết thúc sớm testing khi lỗi. Nhưng Singleton thì lại duy trì trạng thái nên không tốt.
+ 4. Chúng giữ trạng thái suốt vòng đời của ứng dụng. Bạn nên kết thúc sớm testing khi lỗi. Nhưng Singleton thì lại duy trì trạng thái nên nó Chưa tốt.
 
 Đây là một ý kiến khác của [Misko Hevery](http://misko.hevery.com/about/) về [gốc rễ của vấn đề](http://misko.hevery.com/2008/08/25/root-cause-of-singletons/).
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class DBConnection
@@ -880,11 +878,11 @@ $connection = new DBConnection($dsn);
 
 Và bây giờ sử dụng instance `DBConnection` cho ứng dụng của bạn.
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Đóng gói điều kiện
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 if ($article->state === 'published') {
@@ -900,11 +898,11 @@ if ($article->isPublished()) {
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh điều kiện phủ định
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function isDOMNodeNotPresent(\DOMNode $node): bool
@@ -931,7 +929,7 @@ if (isDOMNodePresent($node)) {
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh dùng điều kiện
 
@@ -941,7 +939,7 @@ Câu hỏi thứ hai là, "ồ ngon nhưng tại sao phải làm thế?"
 Bởi vì khái niệm clean code mà ta đã học trước đây: một hàm chỉ nên thực hiện một chức năng.
 Khi bạn có một lớp hoặc hàm chứa `if`, tức là bạn đang muốn nó thực hiện nhiều việc. Luôn nhớ, chỉ một mà thôi.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Airplane
@@ -1003,7 +1001,7 @@ class Cessna implements Airplane
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh kiểm tra kiểu dữ liệu (phần 1)
 
@@ -1013,7 +1011,7 @@ Có nhiều cách để tránh phải làm việc đó.
 
 Điều đầu tiên cần làm là tạo ra những API nhất quán.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function travelToTexas($vehicle): void
@@ -1035,7 +1033,7 @@ function travelToTexas(Traveler $vehicle): void
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh kiểm tra kiểu dữ liệu (phần 2)
 
@@ -1043,12 +1041,12 @@ Nếu bạn đang làm việc với các kiểu dữ liệu nguyên thủy như 
 và sử dụng PHP 7+ và bạn không thể sử dụng tính đa hình nhưng bạn vẫn cảm thấy cần kiểm tra kiểu dữ liệu, hãy xem
 [type declaration](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration)
 hoặc strict mode. Nó cung cấp cho bạn kiểu static trên PHP standard.
-Vấn đề thông thường khi kiểm tra kiểu dữ liệu là sẽ khiến code khó đọc, mất nhiều hơn là được.
+Vấn đề thông thường khi kiểm tra kiểu dữ liệu là sẽ khiến code khó đọc nên tóm lại mất nhiều hơn là được.
 
 Hãy giữ PHP nguyên thủy, viết tests cho tốt, và code reviews cẩn thận là được.
 Nếu không thì chỉ còn cách định nghĩa theo kiểu nghiêm ngặt(strict type declaration) hoặc dùng strict mode.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function combine($val1, $val2): int
@@ -1070,7 +1068,7 @@ function combine(int $val1, int $val2): int
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Xóa dead code
 
@@ -1078,7 +1076,7 @@ Dead code thì cũng củ chuối giống như duplicate code. Không có lý do
 Nếu đoạn code nào đó không được gọi, hãy xóa đi!
 Sau này cần thì chỉ cần tìm lại phiên bản trước bằng git là được.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function oldRequestModule(string $url): void
@@ -1107,7 +1105,7 @@ $request = requestModule($requestUrl);
 inventoryTracker('apples', $request, 'www.inventory-awesome.io');
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 
 ## Đối tượng và kiến trúc dữ liệu
@@ -1127,7 +1125,7 @@ thì ưu điểm là ta không cần phải tìm kiếm và thay đổi quyền 
 
 Thêm vào đó, đây là một phần của nguyên tắc [Open/Closed](#openclosed-principle-ocp).
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class BankAccount
@@ -1182,13 +1180,13 @@ $bankAccount->withdraw($shoesPrice);
 $balance = $bankAccount->getBalance();
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tạo đối tượng có chứa thuộc tính hoặc phương thức private/protected
 
-* Phương thức và thuộc tính `public` rất nguy hiểm, bởi vì vài dòng code phía 
+* Phương thức và thuộc tính `public` khá nguy hiểm, bởi vì vài dòng code phía 
 bên ngoài có thể dễ dàng thay đổi chúng và bạn không thể kiểm soát được nó bị
-thay đổi những gì. **Thay đổi trong lớp rất nguy hiểm cho tất cả các người dùng của lớp đó.**
+thay đổi những gì. **Thay đổi trong một lớp thì nguy hiểm cho tất cả các người dùng của lớp đó.**
 * `protected` cũng nguy hiểm không kém, bởi vì chúng được cấp quyền ở tất cả các lớp con. Điều này có nghĩa là sự khác nhau giữa public và protected chỉ là cơ chế truy cập, nhưng tính đóng gói đảm bảo vẫn giữ nguyên. **Sửa đổi trong lớp thì rất nguy hiểm cho các lớp con.**
 * `private` sửa đổi đảm bảo rằng code **sửa đổi chỉ nguy hiểm trong lớp đó** (bạn sẽ được an toàn khi sửa và không có hiệu ứng [Jenga](http://www.urbandictionary.com/define.php?term=Jengaphobia&defid=2494196)).
 
@@ -1196,7 +1194,7 @@ Do đó, hãy mặc định sử dụng `private` và `public/protected` khi b�
 
 Đọc thêm tại [blog post](http://fabien.potencier.org/pragmatism-over-theory-protected-vs-private.html) được viết bởi [Fabien Potencier](https://github.com/fabpot).
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Employee
@@ -1235,26 +1233,25 @@ $employee = new Employee('John Doe');
 echo 'Employee name: '.$employee->getName(); // Employee name: John Doe
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ## Lớp
 
 ### Ưu tiên thành phần hơn kế thừa
 
 Như đã nói trong [*Design Patterns*](https://en.wikipedia.org/wiki/Design_Patterns) nổi tiếng của Gang of Four,
-bạn nên ưu tiên sử dụng "kiểu thành phần" hơn là "kiểu kế thừa". Có nhiều lý để sử dụng kiểu kế thừa và cũng nhiều nguyên nhân để sử dụng kiểu thành phần.
-Điểm chính của sự tối đa hóa này là nếu bản năng của bạn thích theo kiểu kế thừa,
+bạn nên ưu tiên sử dụng "kiểu thành phần" hơn là "kiểu kế thừa". Có nhiều lý do để sử dụng kiểu kế thừa và cũng có nhiều nguyên nhân để sử dụng kiểu thành phần.
+Điểm chính của sự tối đa hóa này là nếu bạn thích theo kiểu kế thừa,
 hãy thử suy nghĩ "kiểu thành phần" có thể giúp giải quyết vấn đề tốt hơn không. Vì có một vài trường hợp nó sẽ tốt hơn.
 
-Có thể bạn sẽ tự hỏi, "khi nào thì nên dùng kế thừa?" Nó tùy thuộc vào từng vấn đề, khi nào thì
-kiểu kế thừa tốt hơn kiểu thành phần:
+Có thể bạn sẽ tự hỏi, "khi nào thì nên dùng kế thừa?" Nó tùy thuộc vào từng vấn đề, khi nào thì kiểu kế thừa tốt hơn kiểu thành phần:
 
-1. Kiểu kế thừa đó đại diện cho một mối quan hệ "is-a" chứ không phải mối quan hệ "has-a" (Người->Động vật với Người dùng->Thông tin người dùng).
+1. Kiểu kế thừa đó đại diện cho một mối quan hệ "is-a" (Ví dụ: Người->Động vật) chứ không phải mối quan hệ "has-a" (Người dùng->Thông tin người dùng).
 2. Bạn cần sử dụng lại code từ lớp cha (Người có thể di chuyển như động vật).
 3. Bạn muốn khi sửa đổi lớp cha thì tất cả lớp có liên quan sẽ thay đổi dễ dàng.
 (Thay đổi lượng calo của tất cả động vật khi chúng di chuyển).
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Employee 
@@ -1271,8 +1268,8 @@ class Employee
     // ...
 }
 
-// Bad because Employees "have" tax data. 
-// EmployeeTaxData is not a type of Employee
+// Chưa tốt vì Employees "có" thuế. 
+// EmployeeTaxData không phải là một loại của Employee
 
 class EmployeeTaxData extends Employee 
 {
@@ -1329,14 +1326,14 @@ class Employee
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Tránh viết fluent interfaces
 
 [Fluent interface](https://en.wikipedia.org/wiki/Fluent_interface) là một API hướng đối tượng có mục đích cải thiện tính dễ đọc của source code bằng cách
 sử dụng [Method chaining](https://en.wikipedia.org/wiki/Method_chaining).
 
-Trong một số ngữ cảnh, thường là khi xây dựng object mà pattern này giảm tính rườm rà của code (ví dụ [PHPUnit Mock Builder](https://phpunit.de/manual/current/en/test-doubles.html)
+Trong một số ngữ cảnh, thường là khi xây dựng object nơi mà pattern này giảm tính rườm rà của code (ví dụ [PHPUnit Mock Builder](https://phpunit.de/manual/current/en/test-doubles.html)
 hoặc [Doctrine Query Builder](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html)),
 sẽ gây ra một số thiệt hại như sau:
 
@@ -1345,10 +1342,10 @@ sẽ gây ra một số thiệt hại như sau:
 3. Khó tạo [mock](https://en.wikipedia.org/wiki/Mock_object) hơn trong test suite
 4. Khiến cho khó đọc "sự khác nhau giữa các file" hơn khi commit code
 
-Để biết thêm thông tin chi tiết, vui lòng đọc bài [blog post](https://ocramius.github.io/blog/fluent-interfaces-are-evil/)
+Để biết thêm thông tin chi tiết, vui lòng đọc [bài viết](https://ocramius.github.io/blog/fluent-interfaces-are-evil/)
 được viết bởi [Marco Pivetta](https://github.com/Ocramius).
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Car
@@ -1431,7 +1428,7 @@ $car->setModel('F-150');
 $car->dump();
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ## SOLID
 
@@ -1449,7 +1446,7 @@ Như đã đề cập trong cuốn Clean Code, "Không nên có nhiều hơn m�
 Viết một class với thật nhiều chức năng thì quá sướng. Vấn đề là class không có khái niệm liên kết và nó có khá nhiều lý do để thay đổi.
 Nếu quá nhiều chức năng trong một class thì khi thay đổi gì đó mình không biết được hết những ảnh hưởng của nó đến các chức năng khác trong các module liên quan.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class UserSettings
@@ -1513,15 +1510,15 @@ class UserSettings
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Nguyên lý Đóng/Mở (OCP)
 
 Như đã đề cập bởi Bertrand Meyer, "thực thể phần mềm (lớp, modules, hàm,
-etc.) nên cho phép mở rộng, nhưng không cho phép sửa đổi." Điều đó có nghĩa là gì? Nguyên lý này đơn giản là nên cho phép người dùng
+etc...) nên cho phép mở rộng, nhưng không cho phép sửa đổi." Điều đó có nghĩa là gì? Nguyên lý này đơn giản là nên cho phép người dùng
 thêm mới mà không được thay đổi code hiện tại.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 abstract class Adapter
@@ -1626,20 +1623,20 @@ class HttpRequester
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Nguyên lý thay thế Liskov (LSP)
 
-Nó được định nghĩa như sau "Nếu S là phụ thuộc của T, thì object của T có thể được thay thế bởi object của S
-(nghĩa là object của S có thể thay thế object của T) mà không làm thay đổi các thuộc tính của chương trình(tính đúng đắn, công việc thực hiện, ...)"
+Nguyên lý này được định nghĩa như sau "Nếu S là phụ thuộc của T, thì object của T có thể **được thay thế** bởi object của S
+(nghĩa là object của S có thể thay thế object của T) mà không làm thay đổi các thuộc tính của chương trình(tính đúng đắn, công việc thực hiện,...)"
 
 Để dễ hiểu hơn, nếu bạn có một class cha và một class con,
 sau đó class cha và class con có thể được sử dụng hoán đổi cho nhau mà không sai kết quả trả về.
-Có thể vẫn còn khó hiểu, hãy xem ví dụ cơ bản Square-Rectangle.
+Có thể vẫn còn khó hiểu, hãy xem ví dụ cơ bản Square-Rectangle bên dưới.
 
 Trong toán học, hình vuông là hình chữ nhật, nhưng nếu bạn sử dụng quan hệ "is-a" qua kế thừa, bạn sẽ gặp rắc rối.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Rectangle
@@ -1689,7 +1686,7 @@ function renderLargeRectangles(array $rectangles): void
     foreach ($rectangles as $rectangle) {
         $rectangle->setWidth(4);
         $rectangle->setHeight(5);
-        $area = $rectangle->getArea(); // BAD: Will return 25 for Square. Should be 20.
+        $area = $rectangle->getArea(); // Lỗi rồi: Đoạn này sẽ trả về 25, nhưng 20 mới là kết quả đúng.
         $rectangle->render($area);
     }
 }
@@ -1758,17 +1755,17 @@ $shapes = [new Rectangle(4, 5), new Rectangle(4, 5), new Square(5)];
 renderLargeRectangles($shapes);
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Nguyên lý phân tách interface (ISP)
 
-ISP đề cập rằng "Không nên ép người dùng phải phụ thuộc vào interface mà họ không sử dụng." 
+ISP đề cập rằng "Không nên ép người dùng phải phụ thuộc vào interface mà họ không sử dụng."
 
-Để hiểu ý nghĩa của nguyên tắc này, đầu tiên hãy nhìn vào những class mà yêu cầu một số lượng lớn các object cần phải cài đặt để sử dụng.
-Không yêu cầu người dùng phải cài đặt số lượng lớn các tùy chọn là một lợi thế, bởi vì hầu hết chúng không cần thiết.
+Để hiểu ý nghĩa của nguyên tắc này, hãy nhìn vào những class yêu cầu một số lượng lớn các object cần phải inject vào để sử dụng.
+Không yêu cầu người dùng phải inject số lượng lớn các tùy chọn là một lợi thế, bởi vì hầu hết chúng không cần thiết.
 Hãy coi chúng là tùy chọn(có thể không dùng) để giúp cho interface bớt phình to.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 interface Employee
@@ -1847,7 +1844,7 @@ class Robot implements Workable
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ### Nguyên lý đảo ngược dependencies (DIP)
 
@@ -1855,11 +1852,11 @@ Nguyên lý này đề cập 2 vấn đề cơ bản:
 1. Module cấp cao không nên phụ thuộc vào module cấp thấp. Cả hai nên phụ thuộc vào abstract.
 2. Abstract không nên phụ thuộc vào chi tiết, mà phải ngược lại.
 
-Hơi khó hiểu một chút, nhưng nếu làm việc với PHP frameworks (ví dụ Symfony), bạn sẽ thấy nguyên tắc này được áp dụng trên Dependency
-Injection (DI). Một lợi ích lớn của việc này là chúng giảm sự trùng lặp giữa các modules. Trùng lặp thì tất nhiên không tốt vì
+Hơi khó hiểu một chút đúng không? Nhưng nếu bạn làm việc với PHP frameworks (ví dụ Symfony), bạn sẽ thấy nguyên tắc này được áp dụng trên Dependency
+Injection(DI). Một lợi ích lớn của việc này là chúng giảm sự trùng lặp giữa các modules. Trùng lặp thì tất nhiên Chưa tốt vì
 chúng khiến code khó refactor.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 class Employee
@@ -1934,27 +1931,27 @@ class Manager
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ## Nguyên lý đừng lặp lại chính mình (DRY)
 
 Đọc hiểu về nguyên lý [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 
-Tốt nhất nên chống duplicate khi có thể. Vì duplicate code không tốt tí nào, vì khi bạn muốn thay đổi logic bạn cần phải sửa nhiều chỗ.
+Tốt nhất nên chống lặp code ngay khi có thể. Vì lặp code không tốt tí nào, khi bạn muốn thay đổi logic bạn cần phải sửa nhiều chỗ.
 
 Hãy tưởng tượng bạn đang vận hành một nhà hàng và bạn theo dõi lượng hàng tồn kho của bạn: cà chua, hành, tỏi, gia vị,...
 Nếu bạn có nhiều danh sách để quản lý chúng, bạn cần cập nhật tất cả các danh sách đó mỗi khi bạn bán một đĩa thức ăn.
 Nhưng nếu như bạn chỉ có 1 danh sách, thì chỉ cần cập nhật ở một nơi!
 
-Thỉnh thoảng vẫn có duplicate code bởi vì bạn có hai hoặc nhiều hơn những thứ khác nhau, có nhiều điểm chung, nhưng sự khác nhau 
+Thỉnh thoảng vẫn có lặp code bởi vì bạn có hai hoặc nhiều hơn những thứ khác nhau, có nhiều điểm chung, nhưng sự khác nhau 
 giữa chúng buộc bạn phải chia ra 2 hàm làm rất nhiều việc.
-Để xóa bỏ duplicate, cần tạo ra một abstract có thể xử lý sự khác biệt giữa chúng với chỉ 1 hàm/module/lớp.
+Để xóa bỏ lặp code, cần tạo ra một abstract có thể xử lý sự khác biệt giữa chúng với chỉ 1 hàm/module/lớp.
 
-Tạo ra được abstract tốt rất quan trọng, đó là lý do tại sao bạn nên dựa theo các nguyên lý SOLID được đưa ra tại [Classes](#classes).
-Abstract củ chuối có thể sẽ tệ hại hơn là duplicate code, hãy cẩn thận!
-Nếu bạn có thể tạo một abstract tốt, hãy tạo nó! Đừng lặp lại code, bằng không bạn sẽ phải cập nhật nhiều nơi mỗi khi muốn sửa đổi gì đó.
+Tạo ra được abstract tốt rất quan trọng và khó, đó là lý do tại sao bạn nên dựa theo các nguyên lý [SOLID](#solid) được đưa ra tại mục [Lớp](#lớp).
+Abstract củ chuối có thể sẽ tệ hại hơn là lặp code, hãy cẩn thận!
+Nếu có thể tạo một abstract tốt, hãy tạo nó! Đừng lặp lại code, nếu không bạn sẽ phải rất cực khổ mỗi khi muốn sửa đổi gì đó.
 
-**Không tốt:**
+**Chưa tốt:**
 
 ```php
 function showDeveloperList(array $developers): void
@@ -2012,7 +2009,7 @@ function showList(array $employees): void
 
 **Rất tốt:**
 
-Sử dụng một phiên bản gọn hơn thì tốt hơn
+Sử dụng một phiên bản gọn hơn
 
 ```php
 function showList(array $employees): void
@@ -2027,7 +2024,7 @@ function showList(array $employees): void
 }
 ```
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
 
 ## Các ngôn ngữ khác
 
@@ -2045,4 +2042,4 @@ function showList(array $employees): void
 * :fr: **Pháp:**
    * [errorname/clean-code-php](https://github.com/errorname/clean-code-php)
 
-**[⬆ quay lên đầu](#mục-lục)**
+**[⬆ Về mục lục](#mục-lục)**
