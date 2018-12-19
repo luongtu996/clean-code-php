@@ -48,7 +48,7 @@
 
 ## Giới thiệu
 
-Đây là những nguyên lý kỹ thuật phần mềm, được trích từ cuốn sách [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) của tác giả Robert C. Martin(thường gọi là Uncle Bob) rất thích hợp cho ngôn ngữ PHP. Tài liệu này không phải là sách hướng dẫn về phong cách viết code, mà là hướng dẫn cách làm thế nào để viết phần mềm dễ đọc, dễ sử dụng lại, và dễ cải tiến trong PHP.
+Đây là những nguyên lý kỹ thuật phần mềm, được trích từ cuốn sách [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) của tác giả Robert C. Martin (thường gọi là Uncle Bob) rất thích hợp cho ngôn ngữ PHP. Tài liệu này không phải là sách hướng dẫn về phong cách viết code, mà là hướng dẫn cách làm thế nào để viết phần mềm dễ đọc, dễ sử dụng lại, và dễ cải tiến trong PHP.
 
 Bạn không cần phải tuân theo tất cả các nguyên tắc trong tài liệu này.
 Đây chỉ đơn giản là những hướng dẫn, nhưng dù sao nó cũng là đúc kết từ nhiều năm kinh nghiệm của tác giả.
